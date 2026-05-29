@@ -29,7 +29,11 @@ jobs:
 
       - name: Install dependencies
         working-directory: frontend
-        run: npm ci --legacy-peer-deps
+        run: npm install --legacy-peer-deps
+
+      - name: Fix ajv dependency
+        working-directory: frontend
+        run: npm install ajv@8 ajv-keywords@5 --legacy-peer-deps
 
       - name: Build
         working-directory: frontend
@@ -38,7 +42,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: frontend/dist
+          path: frontend/build
 
   deploy:
     environment:
