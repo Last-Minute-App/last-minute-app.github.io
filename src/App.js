@@ -28,8 +28,14 @@ function App() {
             <a href="#how-it-works" className="hover:text-primary transition-colors">How It Works</a>
             <a href="#pricing" className="hover:text-primary transition-colors">Pricing</a>
             <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
+            <a href="https://last-minute-app.github.io/dashboard" className="hover:text-primary transition-colors">Dashboard</a>
           </div>
-          <Button data-testid="nav-download-btn">Download App</Button>
+          <div className="flex gap-2">
+            <Button data-testid="nav-download-btn">Download App</Button>
+            <Button asChild variant="outline" data-testid="nav-dashboard-btn">
+              <a href="https://last-minute-app.github.io/dashboard">Dashboard</a>
+            </Button>
+          </div>
         </div>
       </nav>
 
@@ -564,6 +570,7 @@ function App() {
                 <li><a href="#features" className="hover:text-primary">Features</a></li>
                 <li><a href="#pricing" className="hover:text-primary">Pricing</a></li>
                 <li><a href="#faq" className="hover:text-primary">FAQ</a></li>
+                <li><a href="https://last-minute-app.github.io/dashboard" className="hover:text-primary">Dashboard</a></li>
               </ul>
             </div>
             <div>
