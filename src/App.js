@@ -6,6 +6,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Clock, Bell, Tag, TrendingDown, Users, Store, Smartphone } from "lucide-react";
+import tiphopLogo from "@/assets/tiphop_logo.png";
 
 function App() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -23,7 +24,7 @@ function App() {
       <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2 text-2xl font-bold text-primary">
-            <img src="/tiphop_logo.png" alt="tiphop" className="h-9 w-9 rounded-lg object-contain" />
+            <img src={tiphopLogo} alt="tiphop" className="h-9 w-9 rounded-lg object-contain" />
             <span>tiphop</span>
           </div>
           <div className="hidden md:flex gap-6">
@@ -563,7 +564,7 @@ function App() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 text-2xl font-bold mb-4">
-                <img src="/tiphop_logo.png" alt="tiphop" className="h-9 w-9 rounded-lg object-contain" />
+                <img src={tiphopLogo} alt="tiphop" className="h-9 w-9 rounded-lg object-contain" />
                 <span>tiphop</span>
               </div>
               <p className="text-muted-foreground">
