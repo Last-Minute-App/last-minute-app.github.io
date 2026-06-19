@@ -22,7 +22,10 @@ function App() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="text-2xl font-bold text-primary">LocalDeals</div>
+          <div className="flex items-center gap-2 text-2xl font-bold text-primary">
+            <img src="/tiphop_logo.png" alt="tiphop" className="h-9 w-9 rounded-lg object-contain" />
+            <span>tiphop</span>
+          </div>
           <div className="hidden md:flex gap-6">
             <a href="#features" className="hover:text-primary transition-colors">Features</a>
             <a href="#how-it-works" className="hover:text-primary transition-colors">How It Works</a>
@@ -89,7 +92,7 @@ function App() {
       <section id="features" className="py-16 px-4 bg-muted/30" data-testid="features-section">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Why Choose LocalDeals?</h2>
+            <h2 className="text-4xl font-bold mb-4">Why Choose tiphop?</h2>
             <p className="text-xl text-muted-foreground">Everything you need to save money and discover amazing local offers</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -445,16 +448,16 @@ function App() {
           </div>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1" data-testid="faq-1">
-              <AccordionTrigger className="text-left">How does LocalDeals work?</AccordionTrigger>
+              <AccordionTrigger className="text-left">How does tiphop work?</AccordionTrigger>
               <AccordionContent>
-                LocalDeals connects you with nearby merchants offering time-limited discounts. Simply download the app, enable location services, and browse deals in your area. When you find an offer you like, tap to redeem and show the QR code at checkout.
+                tiphop connects you with nearby merchants offering time-limited discounts. Simply download the app, enable location services, and browse deals in your area. When you find an offer you like, tap to redeem and show the QR code at checkout.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-2" data-testid="faq-2">
               <AccordionTrigger className="text-left">Is the app really free for consumers?</AccordionTrigger>
               <AccordionContent>
-                Yes! LocalDeals is 100% free for consumers. There are no subscription fees, hidden charges, or transaction fees. We make money by charging merchants a small monthly subscription to post deals.
+                Yes! tiphop is 100% free for consumers. There are no subscription fees, hidden charges, or transaction fees. We make money by charging merchants a small monthly subscription to post deals.
               </AccordionContent>
             </AccordionItem>
 
@@ -480,9 +483,9 @@ function App() {
             </AccordionItem>
 
             <AccordionItem value="item-6" data-testid="faq-6">
-              <AccordionTrigger className="text-left">What types of businesses can use LocalDeals?</AccordionTrigger>
+              <AccordionTrigger className="text-left">What types of businesses can use tiphop?</AccordionTrigger>
               <AccordionContent>
-                Any local business with physical locations can use LocalDeals! This includes restaurants, cafes, retail stores, salons, fitness centers, entertainment venues, and service providers. If you have unused capacity or inventory you'd like to sell at a discount, LocalDeals is perfect for you.
+                Any local business with physical locations can use tiphop! This includes restaurants, cafes, retail stores, salons, fitness centers, entertainment venues, and service providers. If you have unused capacity or inventory you'd like to sell at a discount, tiphop is perfect for you.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -559,7 +562,10 @@ function App() {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <div className="text-2xl font-bold mb-4">LocalDeals</div>
+              <div className="flex items-center gap-2 text-2xl font-bold mb-4">
+                <img src="/tiphop_logo.png" alt="tiphop" className="h-9 w-9 rounded-lg object-contain" />
+                <span>tiphop</span>
+              </div>
               <p className="text-muted-foreground">
                 Connecting consumers with local merchants through time-limited discounts.
               </p>
@@ -591,7 +597,7 @@ function App() {
             </div>
           </div>
           <div className="border-t pt-8 text-center text-muted-foreground">
-            <p>© 2025 LocalDeals. All rights reserved.</p>
+            <p>(c) 2025 tiphop. All rights reserved.</p>
           </div>
         </div>
       </footer>
