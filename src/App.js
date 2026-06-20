@@ -56,26 +56,9 @@ function App() {
                 Connect with nearby merchants offering time-limited discounts. Save money while supporting local businesses.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="text-lg" data-testid="hero-appstore-btn">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" className="h-10" />
+                <Button size="lg" className="text-lg" data-testid="hero-download-btn">
+                  Download App
                 </Button>
-                <Button size="lg" variant="outline" className="text-lg" data-testid="hero-playstore-btn">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="h-10" />
-                </Button>
-              </div>
-              <div className="flex gap-8 pt-4">
-                <div>
-                  <div className="text-3xl font-bold">50K+</div>
-                  <div className="text-sm text-muted-foreground">Active Users</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold">1000+</div>
-                  <div className="text-sm text-muted-foreground">Local Merchants</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold">$2M+</div>
-                  <div className="text-sm text-muted-foreground">Saved</div>
-                </div>
               </div>
             </div>
             <div className="relative">
@@ -186,7 +169,7 @@ function App() {
               </div>
               <h3 className="text-2xl font-semibold">Download & Sign Up</h3>
               <p className="text-muted-foreground">
-                Get the app from App Store or Google Play. Create your free account in seconds.
+                Download the app and create your free account in seconds.
               </p>
             </div>
             <div className="text-center space-y-4" data-testid="step-2">
@@ -503,11 +486,8 @@ function App() {
                 Join thousands of users discovering amazing local deals every day. Download now and get your first deal!
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" variant="secondary" className="text-lg" data-testid="cta-appstore-btn">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" className="h-10" />
-                </Button>
-                <Button size="lg" variant="secondary" className="text-lg" data-testid="cta-playstore-btn">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="h-10" />
+                <Button size="lg" variant="secondary" className="text-lg" data-testid="cta-download-btn">
+                  Download App
                 </Button>
               </div>
             </div>
