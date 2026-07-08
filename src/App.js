@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Clock, Bell, Tag, TrendingDown, Users, Store, Smartphone } from "lucide-react";
 import tiphopLogo from "@/assets/tiphop_logo.png";
 
-const APP_DOWNLOAD_URL = "exp://msfossi-anonymous-8081.exp.direct";
+const MOBILE_APP_URL = "https://last-minute-app.github.io/mobile-app/";
 
 function App() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -34,14 +34,10 @@ function App() {
             <a href="#how-it-works" className="hover:text-primary transition-colors">How It Works</a>
             <a href="#pricing" className="hover:text-primary transition-colors">Pricing</a>
             <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
-            <a href="https://last-minute-app.github.io/dashboard" className="hover:text-primary transition-colors">Dashboard</a>
           </div>
           <div className="flex gap-2">
             <Button asChild data-testid="nav-download-btn">
-              <a href={APP_DOWNLOAD_URL}>Download App</a>
-            </Button>
-            <Button asChild variant="outline" data-testid="nav-dashboard-btn">
-              <a href="https://last-minute-app.github.io/dashboard">Dashboard</a>
+              <a href={MOBILE_APP_URL}>Download App</a>
             </Button>
           </div>
         </div>
@@ -61,7 +57,7 @@ function App() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="text-lg" data-testid="hero-download-btn">
-                  <a href={APP_DOWNLOAD_URL}>Download App</a>
+                  <a href={MOBILE_APP_URL}>Download App</a>
                 </Button>
               </div>
             </div>
@@ -350,7 +346,7 @@ function App() {
                   </li>
                 </ul>
                 <Button asChild className="w-full mt-6" data-testid="pricing-consumer-btn">
-                  <a href={APP_DOWNLOAD_URL}>Download Now</a>
+                  <a href={MOBILE_APP_URL}>Download Now</a>
                 </Button>
               </CardContent>
             </Card>
@@ -493,7 +489,7 @@ function App() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" variant="secondary" className="text-lg" data-testid="cta-download-btn">
-                  <a href={APP_DOWNLOAD_URL}>Download App</a>
+                  <a href={MOBILE_APP_URL}>Download App</a>
                 </Button>
               </div>
             </div>
@@ -563,7 +559,6 @@ function App() {
                 <li><a href="#features" className="hover:text-primary">Features</a></li>
                 <li><a href="#pricing" className="hover:text-primary">Pricing</a></li>
                 <li><a href="#faq" className="hover:text-primary">FAQ</a></li>
-                <li><a href="https://last-minute-app.github.io/dashboard" className="hover:text-primary">Dashboard</a></li>
               </ul>
             </div>
             <div>
