@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Clock, Bell, Tag, TrendingDown, Users, Store, Smartphone } from "lucide-react";
 import tiphopLogo from "@/assets/tiphop_logo.png";
 
-const MOBILE_APP_URL = "https://last-minute-app.github.io/mobile-app/";
+const MOBILE_APP_URL = "https://last-minute-app.github.io/dashboard/";
 
 function App() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
