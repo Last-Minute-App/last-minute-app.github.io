@@ -37,7 +37,7 @@ function App() {
           </div>
           <div className="flex gap-2">
             <Button asChild data-testid="nav-download-btn">
-              <a href={MOBILE_APP_URL}>Download App</a>
+              <a href={MOBILE_APP_URL}>Go to App</a>
             </Button>
           </div>
         </div>
@@ -57,7 +57,7 @@ function App() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="text-lg" data-testid="hero-download-btn">
-                  <a href={MOBILE_APP_URL}>Download App</a>
+                  <a href={MOBILE_APP_URL}>Go to App</a>
                 </Button>
               </div>
             </div>
@@ -167,9 +167,9 @@ function App() {
               <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold mx-auto">
                 1
               </div>
-              <h3 className="text-2xl font-semibold">Download & Sign Up</h3>
-              <p className="text-muted-foreground">
-                Download the app and create your free account in seconds.
+                <h3 className="text-2xl font-semibold">Open & Sign Up</h3>
+                <p className="text-muted-foreground">
+                  Open the app and create your free account in seconds.
               </p>
             </div>
             <div className="text-center space-y-4" data-testid="step-2">
@@ -346,7 +346,7 @@ function App() {
                   </li>
                 </ul>
                 <Button asChild className="w-full mt-6" data-testid="pricing-consumer-btn">
-                  <a href={MOBILE_APP_URL}>Download Now</a>
+                  <a href={MOBILE_APP_URL}>Go to App</a>
                 </Button>
               </CardContent>
             </Card>
@@ -436,7 +436,7 @@ function App() {
             <AccordionItem value="item-1" data-testid="faq-1">
               <AccordionTrigger className="text-left">How does tiphop work?</AccordionTrigger>
               <AccordionContent>
-                tiphop connects you with nearby merchants offering time-limited discounts. Simply download the app, enable location services, and browse deals in your area. When you find an offer you like, tap to redeem and show the QR code at checkout.
+                  tiphop connects you with nearby merchants offering time-limited discounts. Simply open the app, enable location services, and browse deals in your area. When you find an offer you like, tap to redeem and show the QR code at checkout.
               </AccordionContent>
             </AccordionItem>
 
@@ -485,11 +485,11 @@ function App() {
             <div className="space-y-6">
               <h2 className="text-4xl md:text-5xl font-bold">Ready to Start Saving?</h2>
               <p className="text-xl opacity-90">
-                Join thousands of users discovering amazing local deals every day. Download now and get your first deal!
+                Join thousands of users discovering amazing local deals every day. Open the app and get your first deal!
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" variant="secondary" className="text-lg" data-testid="cta-download-btn">
-                  <a href={MOBILE_APP_URL}>Download App</a>
+                  <a href={MOBILE_APP_URL}>Go to App</a>
                 </Button>
               </div>
             </div>
