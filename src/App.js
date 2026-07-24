@@ -8,7 +8,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Clock, Bell, Tag, TrendingDown, Users, Store, Smartphone } from "lucide-react";
 import tiphopLogo from "@/assets/tiphop_logo.png";
 
-const MOBILE_APP_URL = "https://last-minute-app.github.io/dashboard/";
+// Root-relative on purpose: this site is served from BOTH
+// last-minute-app.github.io and the custom domain tiphop.gr, and the app
+// lives at /dashboard/ on each. The previous hard-coded github.io URL
+// pushed every tiphop.gr visitor onto a different origin, which
+// (a) split localStorage, so a session started on tiphop.gr didn't carry
+// over, and (b) meant the "Add to Home Screen" prompt — and therefore the
+// installed app — belonged to github.io rather than tiphop.gr.
+const MOBILE_APP_URL = "/dashboard/";
 
 function App() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
