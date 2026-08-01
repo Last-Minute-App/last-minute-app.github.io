@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Clock, Bell, Tag, TrendingDown, Users, Store, Smartphone } from "lucide-react";
+import { MapPin, Clock, Bell, TrendingDown, Users, Store, Smartphone } from "lucide-react";
 import tiphopLogo from "@/assets/tiphop_logo.png";
 
 // Root-relative on purpose: this site is served from BOTH
@@ -39,7 +39,6 @@ function App() {
           <div className="hidden md:flex gap-6">
             <a href="#features" className="hover:text-primary transition-colors">Features</a>
             <a href="#how-it-works" className="hover:text-primary transition-colors">How It Works</a>
-            <a href="#pricing" className="hover:text-primary transition-colors">Pricing</a>
             <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
           </div>
           <div className="flex gap-2">
@@ -56,7 +55,7 @@ function App() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                Discover Local Deals
+                Discover Local Offers
                 <span className="block text-primary">In Real-Time</span>
               </h1>
               <p className="text-xl text-muted-foreground">
@@ -94,7 +93,7 @@ function App() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Automatically find deals from merchants within your chosen radius. No more missing out on nearby offers.
+                  Automatically find offers from merchants within your chosen radius. No more missing out on nearby offers.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -106,7 +105,7 @@ function App() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Get instant access to time-sensitive deals. Merchants can push last-minute discounts to fill capacity.
+                  Get instant access to time-sensitive offers. Merchants can push last-minute discounts to fill capacity.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -118,7 +117,7 @@ function App() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Receive personalized alerts for deals matching your preferences. Never miss a great opportunity.
+                  Receive personalized alerts for offers matching your preferences. Never miss a great opportunity.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -183,7 +182,7 @@ function App() {
               <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold mx-auto">
                 2
               </div>
-              <h3 className="text-2xl font-semibold">Browse Local Deals</h3>
+              <h3 className="text-2xl font-semibold">Browse Local Offers</h3>
               <p className="text-muted-foreground">
                 Explore offers from nearby merchants. Filter by category, distance, and discount amount.
               </p>
@@ -215,7 +214,7 @@ function App() {
                 alt="App screenshot 1"
                 className="rounded-xl shadow-lg w-full"
               />
-              <p className="text-center font-medium">Browse Local Deals</p>
+              <p className="text-center font-medium">Browse Local Offers</p>
             </div>
             <div className="space-y-4">
               <img 
@@ -253,7 +252,7 @@ function App() {
                   ))}
                 </div>
                 <p className="mb-4 text-muted-foreground">
-                  "I've saved over $500 in just two months! The real-time notifications are perfect for catching last-minute deals near my office."
+                  "I've saved over $500 in just two months! The real-time notifications are perfect for catching last-minute offers near my office."
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-semibold">
@@ -314,124 +313,6 @@ function App() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-16 px-4 bg-muted/30" data-testid="pricing-section">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
-            <p className="text-xl text-muted-foreground">Choose the plan that works for you</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card data-testid="pricing-consumer">
-              <CardHeader>
-                <Users className="w-12 h-12 text-primary mb-4" />
-                <CardTitle className="text-2xl">For Consumers</CardTitle>
-                <div className="text-4xl font-bold mt-4">Free</div>
-                <CardDescription>Forever</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Unlimited deal browsing
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Real-time notifications
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Location-based search
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Savings tracker
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    No hidden fees
-                  </li>
-                </ul>
-                <Button asChild className="w-full mt-6" data-testid="pricing-consumer-btn">
-                  <a href={MOBILE_APP_URL}>Go to App</a>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-primary border-2 relative" data-testid="pricing-merchant-basic">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold">
-                Popular
-              </div>
-              <CardHeader>
-                <Store className="w-12 h-12 text-primary mb-4" />
-                <CardTitle className="text-2xl">Basic Merchant</CardTitle>
-                <div className="text-4xl font-bold mt-4">$49</div>
-                <CardDescription>per month</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Up to 50 deals/month
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Real-time deal posting
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Analytics dashboard
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Customer insights
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Email support
-                  </li>
-                </ul>
-                <Button className="w-full mt-6" data-testid="pricing-basic-btn">Get Started</Button>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="pricing-merchant-pro">
-              <CardHeader>
-                <Tag className="w-12 h-12 text-primary mb-4" />
-                <CardTitle className="text-2xl">Pro Merchant</CardTitle>
-                <div className="text-4xl font-bold mt-4">$99</div>
-                <CardDescription>per month</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Unlimited deals
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Priority placement
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Advanced analytics
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Custom branding
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-green-500">✓</span>
-                    Priority support
-                  </li>
-                </ul>
-                <Button className="w-full mt-6" variant="outline" data-testid="pricing-pro-btn">Get Started</Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* FAQ Section */}
       <section id="faq" className="py-16 px-4" data-testid="faq-section">
         <div className="container mx-auto max-w-3xl">
@@ -443,35 +324,35 @@ function App() {
             <AccordionItem value="item-1" data-testid="faq-1">
               <AccordionTrigger className="text-left">How does tiphop work?</AccordionTrigger>
               <AccordionContent>
-                  tiphop connects you with nearby merchants offering time-limited discounts. Simply open the app, enable location services, and browse deals in your area. When you find an offer you like, tap to redeem and show the QR code at checkout.
+                  tiphop connects you with nearby merchants offering time-limited discounts. Simply open the app, enable location services, and browse offers in your area. When you find an offer you like, tap to redeem and show the QR code at checkout.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-2" data-testid="faq-2">
               <AccordionTrigger className="text-left">Is the app really free for consumers?</AccordionTrigger>
               <AccordionContent>
-                Yes! tiphop is 100% free for consumers. There are no subscription fees, hidden charges, or transaction fees. We make money by charging merchants a small monthly subscription to post deals.
+                Yes! tiphop is 100% free for consumers — no subscription fees, hidden charges, or transaction fees. And it's completely free for merchants too.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-3" data-testid="faq-3">
-              <AccordionTrigger className="text-left">How do I redeem a deal?</AccordionTrigger>
+              <AccordionTrigger className="text-left">How do I redeem an offer?</AccordionTrigger>
               <AccordionContent>
-                Redemption is simple! Once you find a deal you want, tap the "Redeem" button in the app. A unique QR code will be generated. Show this code to the merchant at checkout, and they'll scan it to apply your discount instantly.
+                Redemption is simple! Once you find an offer you want, tap the "Redeem" button in the app. A unique QR code will be generated. Show this code to the merchant at checkout, and they'll scan it to apply your discount instantly.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-4" data-testid="faq-4">
-              <AccordionTrigger className="text-left">Can I save deals for later?</AccordionTrigger>
+              <AccordionTrigger className="text-left">Can I save offers for later?</AccordionTrigger>
               <AccordionContent>
-                Absolutely! You can save any deal to your favorites list. However, keep in mind that many deals are time-sensitive, so we recommend redeeming them before they expire. You'll receive notifications if a saved deal is about to expire.
+                Absolutely! You can save any offer to your favorites list. However, keep in mind that many offers are time-sensitive, so we recommend redeeming them before they expire. You'll receive notifications if a saved offer is about to expire.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-5" data-testid="faq-5">
               <AccordionTrigger className="text-left">I'm a merchant. How do I get started?</AccordionTrigger>
               <AccordionContent>
-                Getting started is easy! Sign up for a merchant account through the app or our website. Choose your plan (Basic or Pro), verify your business, and you can start posting deals immediately. Our team will guide you through the setup process.
+                Getting started is easy — and completely free. Sign up for a merchant account through the app or our website, verify your business, and you can start posting offers immediately. There are no plans, subscription fees, or posting charges. Our team will guide you through the setup process.
               </AccordionContent>
             </AccordionItem>
 
@@ -492,7 +373,7 @@ function App() {
             <div className="space-y-6">
               <h2 className="text-4xl md:text-5xl font-bold">Ready to Start Saving?</h2>
               <p className="text-xl opacity-90">
-                Join thousands of users discovering amazing local deals every day. Open the app and get your first deal!
+                Join thousands of users discovering amazing local offers every day. Open the app and get your first offer!
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" variant="secondary" className="text-lg" data-testid="cta-download-btn">
@@ -564,7 +445,6 @@ function App() {
               <h3 className="font-semibold mb-4">Product</h3>
               <ul className="space-y-2 text-muted-foreground">
                 <li><a href="#features" className="hover:text-primary">Features</a></li>
-                <li><a href="#pricing" className="hover:text-primary">Pricing</a></li>
                 <li><a href="#faq" className="hover:text-primary">FAQ</a></li>
               </ul>
             </div>
