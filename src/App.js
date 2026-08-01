@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Clock, Bell, TrendingDown, Users, Store, Smartphone } from "lucide-react";
+import { MapPin, Clock, Bell, TrendingDown, Store, Smartphone } from "lucide-react";
 import tiphopLogo from "@/assets/tiphop_logo.png";
 
 // Root-relative on purpose: this site is served from BOTH
@@ -232,83 +232,6 @@ function App() {
               />
               <p className="text-center font-medium">Track Your Savings</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-16 px-4" data-testid="testimonials-section">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">What Our Users Say</h2>
-            <p className="text-xl text-muted-foreground">Join thousands of happy savers and merchants</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card data-testid="testimonial-1">
-              <CardContent className="pt-6">
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-yellow-500">★</span>
-                  ))}
-                </div>
-                <p className="mb-4 text-muted-foreground">
-                  "I've saved over $500 in just two months! The real-time notifications are perfect for catching last-minute offers near my office."
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-semibold">
-                    SM
-                  </div>
-                  <div>
-                    <div className="font-semibold">Sarah Martinez</div>
-                    <div className="text-sm text-muted-foreground">Regular User</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="testimonial-2">
-              <CardContent className="pt-6">
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-yellow-500">★</span>
-                  ))}
-                </div>
-                <p className="mb-4 text-muted-foreground">
-                  "As a restaurant owner, this app helped me fill empty tables during slow hours. It's a win-win for everyone!"
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-semibold">
-                    JC
-                  </div>
-                  <div>
-                    <div className="font-semibold">James Chen</div>
-                    <div className="text-sm text-muted-foreground">Restaurant Owner</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="testimonial-3">
-              <CardContent className="pt-6">
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-yellow-500">★</span>
-                  ))}
-                </div>
-                <p className="mb-4 text-muted-foreground">
-                  "Love discovering new local businesses through the app. The location feature makes it so convenient!"
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-semibold">
-                    EP
-                  </div>
-                  <div>
-                    <div className="font-semibold">Emily Parker</div>
-                    <div className="text-sm text-muted-foreground">Student</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
