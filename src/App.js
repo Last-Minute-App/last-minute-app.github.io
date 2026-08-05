@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Clock, Bell, TrendingDown, Store, Smartphone } from "lucide-react";
+import { MapPin, Clock, Bell, TrendingDown, Smartphone, Heart, UtensilsCrossed, Bookmark, Share2, ShieldCheck, Languages, Gift } from "lucide-react";
 import tiphopLogo from "@/assets/tiphop_logo.png";
 
 // Root-relative on purpose: this site is served from BOTH
@@ -59,7 +59,7 @@ function App() {
                 <span className="block text-primary">In Real-Time</span>
               </h1>
               <p className="text-xl text-muted-foreground">
-                Connect with nearby merchants offering time-limited discounts. Save money while supporting local businesses.
+                Connect with nearby stores offering time-limited discounts. Save money while supporting local businesses.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="text-lg" data-testid="hero-download-btn">
@@ -93,7 +93,7 @@ function App() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Automatically find offers from merchants within your chosen radius. No more missing out on nearby offers.
+                  Find offers from stores within your chosen radius — from 500m up to 50km. Never miss a deal right next door.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -101,11 +101,11 @@ function App() {
             <Card data-testid="feature-realtime">
               <CardHeader>
                 <Clock className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Real-Time Offers</CardTitle>
+                <CardTitle>Real-Time & Scheduled Offers</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Get instant access to time-sensitive offers. Merchants can push last-minute discounts to fill capacity.
+                  Grab time-limited deals the moment they drop, and see what's starting later today. Stores push last-minute discounts to fill unused capacity.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -117,7 +117,67 @@ function App() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Receive personalized alerts for offers matching your preferences. Never miss a great opportunity.
+                  Personalized alerts for your favorite categories and distance — with quiet hours so you're never pinged in the middle of the night.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card data-testid="feature-follow">
+              <CardHeader>
+                <Heart className="w-12 h-12 text-primary mb-4" />
+                <CardTitle>Follow Your Favorite Stores</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base">
+                  Follow the stores you love and get notified the instant they post a new offer.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card data-testid="feature-dinein">
+              <CardHeader>
+                <UtensilsCrossed className="w-12 h-12 text-primary mb-4" />
+                <CardTitle>Dine-In Reservations</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base">
+                  Reserve a table deal for your whole party at a fixed price per person — perfect for food, drinks, and sweets.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card data-testid="feature-bookmark">
+              <CardHeader>
+                <Bookmark className="w-12 h-12 text-primary mb-4" />
+                <CardTitle>Save & Get Reminded</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base">
+                  Bookmark a scheduled offer and we'll notify you the moment it goes live — so you're first in line.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card data-testid="feature-share">
+              <CardHeader>
+                <Share2 className="w-12 h-12 text-primary mb-4" />
+                <CardTitle>Share Offers</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base">
+                  Found a great deal? Share it with friends and family in a single tap.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card data-testid="feature-merchants">
+              <CardHeader>
+                <ShieldCheck className="w-12 h-12 text-primary mb-4" />
+                <CardTitle>Verified Stores & Ratings</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base">
+                  Every store is verified and rated by the community. Book and buy with confidence.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -125,23 +185,11 @@ function App() {
             <Card data-testid="feature-savings">
               <CardHeader>
                 <TrendingDown className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Maximum Savings</CardTitle>
+                <CardTitle>Track Your Savings</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Save up to 70% on local services and products. Track your total savings over time.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="feature-merchants">
-              <CardHeader>
-                <Store className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Verified Merchants</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  All merchants are verified and rated by our community. Shop with confidence.
+                  Save up to 70% on local products and services, and watch your total savings add up over time.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -149,11 +197,35 @@ function App() {
             <Card data-testid="feature-easy">
               <CardHeader>
                 <Smartphone className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Easy Redemption</CardTitle>
+                <CardTitle>Easy QR Redemption</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  One-tap redemption with QR codes. Simple, fast, and secure transactions.
+                  One-tap redemption with a QR code at checkout. Simple, fast, and secure.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card data-testid="feature-localization">
+              <CardHeader>
+                <Languages className="w-12 h-12 text-primary mb-4" />
+                <CardTitle>Your Language, Your Theme</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base">
+                  Full English & Greek support, light or dark mode, and installable on any phone — no app store required.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card data-testid="feature-free">
+              <CardHeader>
+                <Gift className="w-12 h-12 text-primary mb-4" />
+                <CardTitle>Always Free</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base">
+                  100% free for shoppers and stores alike — no subscriptions, no hidden charges, no transaction fees.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -184,7 +256,7 @@ function App() {
               </div>
               <h3 className="text-2xl font-semibold">Browse Local Offers</h3>
               <p className="text-muted-foreground">
-                Explore offers from nearby merchants. Filter by category, distance, and discount amount.
+                Explore offers from nearby stores. Filter by category, distance, and discount amount.
               </p>
             </div>
             <div className="text-center space-y-4" data-testid="step-3">
@@ -247,21 +319,21 @@ function App() {
             <AccordionItem value="item-1" data-testid="faq-1">
               <AccordionTrigger className="text-left">How does tiphop work?</AccordionTrigger>
               <AccordionContent>
-                  tiphop connects you with nearby merchants offering time-limited discounts. Simply open the app, enable location services, and browse offers in your area. When you find an offer you like, tap to redeem and show the QR code at checkout.
+                  tiphop connects you with nearby stores offering time-limited discounts. Simply open the app, enable location services, and browse offers in your area. When you find an offer you like, tap to redeem and show the QR code at checkout.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-2" data-testid="faq-2">
               <AccordionTrigger className="text-left">Is the app really free for consumers?</AccordionTrigger>
               <AccordionContent>
-                Yes! tiphop is 100% free for consumers — no subscription fees, hidden charges, or transaction fees. And it's completely free for merchants too.
+                Yes! tiphop is 100% free for consumers — no subscription fees, hidden charges, or transaction fees. And it's completely free for stores too.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-3" data-testid="faq-3">
               <AccordionTrigger className="text-left">How do I redeem an offer?</AccordionTrigger>
               <AccordionContent>
-                Redemption is simple! Once you find an offer you want, tap the "Redeem" button in the app. A unique QR code will be generated. Show this code to the merchant at checkout, and they'll scan it to apply your discount instantly.
+                Redemption is simple! Once you find an offer you want, tap the "Redeem" button in the app. A unique QR code will be generated. Show this code to the store at checkout, and they'll scan it to apply your discount instantly.
               </AccordionContent>
             </AccordionItem>
 
@@ -273,9 +345,9 @@ function App() {
             </AccordionItem>
 
             <AccordionItem value="item-5" data-testid="faq-5">
-              <AccordionTrigger className="text-left">I'm a merchant. How do I get started?</AccordionTrigger>
+              <AccordionTrigger className="text-left">I run a store. How do I get started?</AccordionTrigger>
               <AccordionContent>
-                Getting started is easy — and completely free. Sign up for a merchant account through the app or our website, verify your business, and you can start posting offers immediately. There are no plans, subscription fees, or posting charges. Our team will guide you through the setup process.
+                Getting started is easy — and completely free. Sign up for a store account through the app or our website, verify your business, and you can start posting offers immediately. There are no plans, subscription fees, or posting charges. Our team will guide you through the setup process.
               </AccordionContent>
             </AccordionItem>
 
@@ -361,7 +433,7 @@ function App() {
                 <span>tiphop</span>
               </div>
               <p className="text-muted-foreground">
-                Connecting consumers with local merchants through time-limited discounts.
+                Connecting consumers with local stores through time-limited discounts.
               </p>
             </div>
             <div>
