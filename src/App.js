@@ -95,9 +95,11 @@ function App() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2 text-2xl font-bold text-primary">
+          <div className="flex items-center gap-2 text-2xl font-bold text-primary shrink-0">
             <img src={tiphopLogo} alt="tiphop" className="h-9 w-9 rounded-lg object-contain" />
-            <span>tiphop</span>
+            {/* Wordmark hidden on small screens so the logo + language toggle +
+                CTA never collide on narrow phones (esp. the longer Greek CTA). */}
+            <span className="hidden sm:inline">tiphop</span>
           </div>
           <div className="hidden md:flex gap-6">
             <a href="#features" className="hover:text-primary transition-colors">{t("nav_features")}</a>
