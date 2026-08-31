@@ -18,13 +18,13 @@ import { translations } from "@/translations";
 // installed app — belonged to github.io rather than tiphop.gr.
 const MOBILE_APP_URL = "/dashboard/";
 
-// Contact destination + delivery. Messages go to this inbox. When a Web3Forms
-// access key (free, https://web3forms.com — created against tiphop.app@gmail.com)
-// is set, the form silently POSTs and the visitor never leaves the page. Until
-// then it gracefully falls back to the visitor's mail client, pre-filled to the
-// same address, so no message is ever lost.
+// Contact form delivery. Posts to OUR OWN API's public /contact endpoint, which
+// reuses the app's existing SMTP + support inbox (SUPPORT_INBOX = the address
+// below) and also stores the message in the admin Feedback tab. No third party.
+// On any network/API error we fall back to the visitor's mail client so a
+// message is never silently lost.
 const CONTACT_EMAIL = "tiphop.app@gmail.com";
-const CONTACT_ACCESS_KEY = ""; // ← paste the Web3Forms access key here to enable silent email delivery
+const CONTACT_ENDPOINT = "https://last-minute-app-904761941913.europe-west1.run.app/api/contact";
 
 function App() {
   const [lang, setLang] = useState(() => {
@@ -47,44 +47,31 @@ function App() {
     try { document.documentElement.lang = lang; } catch { /* noop */ }
   }, [lang]);
 
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "", company: "" });
   const [sending, setSending] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // No form-service key yet → hand off to the visitor's mail client, pre-filled
-    // to CONTACT_EMAIL, so the message still reaches us.
-    if (!CONTACT_ACCESS_KEY) {
-      const subject = encodeURIComponent(`tiphop — message from ${formData.name || "website"}`);
-      const body = encodeURIComponent(`${formData.message}\n\n—\n${formData.name} <${formData.email}>`);
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-      return;
-    }
-
     setSending(true);
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch(CONTACT_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: CONTACT_ACCESS_KEY,
-          subject: `tiphop website — message from ${formData.name || "visitor"}`,
-          from_name: "tiphop website",
           name: formData.name,
           email: formData.email,
           message: formData.message,
+          company: formData.company || "", // honeypot — real users leave it empty
         }),
       });
-      const data = await res.json();
-      if (data && data.success) {
-        alert(t("form_thanks"));
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        alert(t("form_error"));
-      }
+      if (!res.ok) throw new Error(`status ${res.status}`);
+      alert(t("form_thanks"));
+      setFormData({ name: "", email: "", message: "", company: "" });
     } catch {
-      alert(t("form_error"));
+      // Network/API problem → don't lose the message: hand off to the mail client.
+      const subject = encodeURIComponent(`tiphop — message from ${formData.name || "website"}`);
+      const body = encodeURIComponent(`${formData.message}\n\n—\n${formData.name} <${formData.email}>`);
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
     } finally {
       setSending(false);
     }
@@ -311,6 +298,19 @@ function App() {
                       data-testid="contact-message-input"
                     />
                   </div>
+                  {/* Honeypot: off-screen + hidden from assistive tech. Real
+                      users never touch it; bots that autofill it get dropped
+                      server-side. */}
+                  <input
+                    type="text"
+                    name="company"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+                  />
                   <Button type="submit" className="w-full" disabled={sending} data-testid="contact-submit-btn">
                     {sending ? t("form_sending") : t("form_send")}
                   </Button>
