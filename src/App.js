@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "@/App.css";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Clock, Bell, TrendingDown, Smartphone, Heart, UtensilsCrossed, Bookmark, Share2, ShieldCheck, Languages, Gift } from "lucide-react";
 import tiphopLogo from "@/assets/tiphop_logo.png";
+import { translations } from "@/translations";
 
 // Root-relative on purpose: this site is served from BOTH
 // last-minute-app.github.io and the custom domain tiphop.gr, and the app
@@ -17,14 +18,76 @@ import tiphopLogo from "@/assets/tiphop_logo.png";
 // installed app — belonged to github.io rather than tiphop.gr.
 const MOBILE_APP_URL = "/dashboard/";
 
-function App() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+// Contact destination + delivery. Messages go to this inbox. When a Web3Forms
+// access key (free, https://web3forms.com — created against tiphop.app@gmail.com)
+// is set, the form silently POSTs and the visitor never leaves the page. Until
+// then it gracefully falls back to the visitor's mail client, pre-filled to the
+// same address, so no message is ever lost.
+const CONTACT_EMAIL = "tiphop.app@gmail.com";
+const CONTACT_ACCESS_KEY = ""; // ← paste the Web3Forms access key here to enable silent email delivery
 
-  const handleSubmit = (e) => {
+function App() {
+  const [lang, setLang] = useState(() => {
+    try {
+      const saved = localStorage.getItem("tiphop_lang");
+      if (saved === "en" || saved === "el") return saved;
+      if (typeof navigator !== "undefined" && (navigator.language || "").toLowerCase().startsWith("el")) return "el";
+    } catch { /* storage blocked */ }
+    return "en";
+  });
+
+  const t = (key) => (translations[lang] && translations[lang][key]) || translations.en[key] || key;
+
+  const switchLang = (next) => {
+    setLang(next);
+    try { localStorage.setItem("tiphop_lang", next); } catch { /* noop */ }
+  };
+
+  useEffect(() => {
+    try { document.documentElement.lang = lang; } catch { /* noop */ }
+  }, [lang]);
+
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Contact form submitted:", formData);
-    alert("Thank you! We'll get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
+
+    // No form-service key yet → hand off to the visitor's mail client, pre-filled
+    // to CONTACT_EMAIL, so the message still reaches us.
+    if (!CONTACT_ACCESS_KEY) {
+      const subject = encodeURIComponent(`tiphop — message from ${formData.name || "website"}`);
+      const body = encodeURIComponent(`${formData.message}\n\n—\n${formData.name} <${formData.email}>`);
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+      return;
+    }
+
+    setSending(true);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: CONTACT_ACCESS_KEY,
+          subject: `tiphop website — message from ${formData.name || "visitor"}`,
+          from_name: "tiphop website",
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+      const data = await res.json();
+      if (data && data.success) {
+        alert(t("form_thanks"));
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        alert(t("form_error"));
+      }
+    } catch {
+      alert(t("form_error"));
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -37,13 +100,29 @@ function App() {
             <span>tiphop</span>
           </div>
           <div className="hidden md:flex gap-6">
-            <a href="#features" className="hover:text-primary transition-colors">Features</a>
-            <a href="#how-it-works" className="hover:text-primary transition-colors">How It Works</a>
-            <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
+            <a href="#features" className="hover:text-primary transition-colors">{t("nav_features")}</a>
+            <a href="#how-it-works" className="hover:text-primary transition-colors">{t("nav_how")}</a>
+            <a href="#faq" className="hover:text-primary transition-colors">{t("nav_faq")}</a>
           </div>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
+            <div className="flex items-center rounded-full border overflow-hidden" role="group" aria-label="Language">
+              {["en", "el"].map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  onClick={() => switchLang(l)}
+                  aria-pressed={lang === l}
+                  data-testid={`lang-${l}`}
+                  className={`px-3 py-1.5 text-sm font-semibold transition-colors ${
+                    lang === l ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {l === "en" ? "EN" : "ΕΛ"}
+                </button>
+              ))}
+            </div>
             <Button asChild data-testid="nav-download-btn">
-              <a href={MOBILE_APP_URL}>Go to App</a>
+              <a href={MOBILE_APP_URL}>{t("nav_cta")}</a>
             </Button>
           </div>
         </div>
@@ -55,21 +134,19 @@ function App() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                Discover Local Offers
-                <span className="block text-primary">In Real-Time</span>
+                {t("hero_title_1")}
+                <span className="block text-primary">{t("hero_title_2")}</span>
               </h1>
-              <p className="text-xl text-muted-foreground">
-                Connect with nearby stores offering time-limited discounts. Save money while supporting local businesses.
-              </p>
+              <p className="text-xl text-muted-foreground">{t("hero_sub")}</p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="text-lg" data-testid="hero-download-btn">
-                  <a href={MOBILE_APP_URL}>Go to App</a>
+                  <a href={MOBILE_APP_URL}>{t("nav_cta")}</a>
                 </Button>
               </div>
             </div>
             <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwzfHxtb2JpbGUlMjBtYXJrZXRwbGFjZXxlbnwwfHx8fDE3Nzk1MzI5NzN8MA&ixlib=rb-4.1.0&q=85" 
+              <img
+                src="https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwzfHxtb2JpbGUlMjBtYXJrZXRwbGFjZXxlbnwwfHx8fDE3Nzk1MzI5NzN8MA&ixlib=rb-4.1.0&q=85"
                 alt="Mobile marketplace app"
                 className="rounded-2xl shadow-2xl"
               />
@@ -82,153 +159,37 @@ function App() {
       <section id="features" className="py-16 px-4 bg-muted/30" data-testid="features-section">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Why Choose tiphop?</h2>
-            <p className="text-xl text-muted-foreground">Everything you need to save money and discover amazing local offers</p>
+            <h2 className="text-4xl font-bold mb-4">{t("features_title")}</h2>
+            <p className="text-xl text-muted-foreground">{t("features_sub")}</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card data-testid="feature-location">
-              <CardHeader>
-                <MapPin className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Location-Based Discovery</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Find offers from stores within your chosen radius — from 500m up to 50km. Never miss a deal right next door.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="feature-realtime">
-              <CardHeader>
-                <Clock className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Real-Time & Scheduled Offers</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Grab time-limited deals the moment they drop, and see what's starting later today. Stores push last-minute discounts to fill unused capacity.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="feature-notifications">
-              <CardHeader>
-                <Bell className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Smart Notifications</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Personalized alerts for your favorite categories and distance — with quiet hours so you're never pinged in the middle of the night.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="feature-follow">
-              <CardHeader>
-                <Heart className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Follow Your Favorite Stores</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Follow the stores you love and get notified the instant they post a new offer.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="feature-dinein">
-              <CardHeader>
-                <UtensilsCrossed className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Dine-In Reservations</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Reserve a table deal for your whole party at a fixed price per person — perfect for food, drinks, and sweets.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="feature-bookmark">
-              <CardHeader>
-                <Bookmark className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Save & Get Reminded</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Bookmark a scheduled offer and we'll notify you the moment it goes live — so you're first in line.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="feature-share">
-              <CardHeader>
-                <Share2 className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Share Offers</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Found a great deal? Share it with friends and family in a single tap.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="feature-merchants">
-              <CardHeader>
-                <ShieldCheck className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Verified Stores & Ratings</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Every store is verified and rated by the community. Book and buy with confidence.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="feature-savings">
-              <CardHeader>
-                <TrendingDown className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Track Your Savings</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Save up to 70% on local products and services, and watch your total savings add up over time.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="feature-easy">
-              <CardHeader>
-                <Smartphone className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Easy QR Redemption</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  One-tap redemption with a QR code at checkout. Simple, fast, and secure.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="feature-localization">
-              <CardHeader>
-                <Languages className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Your Language, Your Theme</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  Full English & Greek support, light or dark mode, and installable on any phone — no app store required.
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card data-testid="feature-free">
-              <CardHeader>
-                <Gift className="w-12 h-12 text-primary mb-4" />
-                <CardTitle>Always Free</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  100% free for shoppers and stores alike — no subscriptions, no hidden charges, no transaction fees.
-                </CardDescription>
-              </CardContent>
-            </Card>
+            {[
+              { icon: MapPin, tid: "feature-location", t: "feat_location_t", d: "feat_location_d" },
+              { icon: Clock, tid: "feature-realtime", t: "feat_realtime_t", d: "feat_realtime_d" },
+              { icon: Bell, tid: "feature-notifications", t: "feat_notifications_t", d: "feat_notifications_d" },
+              { icon: Heart, tid: "feature-follow", t: "feat_follow_t", d: "feat_follow_d" },
+              { icon: UtensilsCrossed, tid: "feature-dinein", t: "feat_dinein_t", d: "feat_dinein_d" },
+              { icon: Bookmark, tid: "feature-bookmark", t: "feat_bookmark_t", d: "feat_bookmark_d" },
+              { icon: Share2, tid: "feature-share", t: "feat_share_t", d: "feat_share_d" },
+              { icon: ShieldCheck, tid: "feature-merchants", t: "feat_verified_t", d: "feat_verified_d" },
+              { icon: TrendingDown, tid: "feature-savings", t: "feat_savings_t", d: "feat_savings_d" },
+              { icon: Smartphone, tid: "feature-easy", t: "feat_qr_t", d: "feat_qr_d" },
+              { icon: Languages, tid: "feature-localization", t: "feat_localization_t", d: "feat_localization_d" },
+              { icon: Gift, tid: "feature-free", t: "feat_free_t", d: "feat_free_d" },
+            ].map((f) => {
+              const Icon = f.icon;
+              return (
+                <Card key={f.tid} data-testid={f.tid}>
+                  <CardHeader>
+                    <Icon className="w-12 h-12 text-primary mb-4" />
+                    <CardTitle>{t(f.t)}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-base">{t(f.d)}</CardDescription>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -237,37 +198,23 @@ function App() {
       <section id="how-it-works" className="py-16 px-4" data-testid="how-it-works-section">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">How It Works</h2>
-            <p className="text-xl text-muted-foreground">Start saving in three simple steps</p>
+            <h2 className="text-4xl font-bold mb-4">{t("how_title")}</h2>
+            <p className="text-xl text-muted-foreground">{t("how_sub")}</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center space-y-4" data-testid="step-1">
-              <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold mx-auto">
-                1
+            {[
+              { n: "1", tid: "step-1", t: "step1_t", d: "step1_d" },
+              { n: "2", tid: "step-2", t: "step2_t", d: "step2_d" },
+              { n: "3", tid: "step-3", t: "step3_t", d: "step3_d" },
+            ].map((s) => (
+              <div key={s.tid} className="text-center space-y-4" data-testid={s.tid}>
+                <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold mx-auto">
+                  {s.n}
+                </div>
+                <h3 className="text-2xl font-semibold">{t(s.t)}</h3>
+                <p className="text-muted-foreground">{t(s.d)}</p>
               </div>
-                <h3 className="text-2xl font-semibold">Open & Sign Up</h3>
-                <p className="text-muted-foreground">
-                  Open the app and create your free account in seconds.
-              </p>
-            </div>
-            <div className="text-center space-y-4" data-testid="step-2">
-              <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold mx-auto">
-                2
-              </div>
-              <h3 className="text-2xl font-semibold">Browse Local Offers</h3>
-              <p className="text-muted-foreground">
-                Explore offers from nearby stores. Filter by category, distance, and discount amount.
-              </p>
-            </div>
-            <div className="text-center space-y-4" data-testid="step-3">
-              <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold mx-auto">
-                3
-              </div>
-              <h3 className="text-2xl font-semibold">Redeem & Save</h3>
-              <p className="text-muted-foreground">
-                Show your QR code at checkout and enjoy instant savings. It's that simple!
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -276,34 +223,20 @@ function App() {
       <section className="py-16 px-4 bg-muted/30" data-testid="screenshots-section">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">See It In Action</h2>
-            <p className="text-xl text-muted-foreground">A glimpse of our beautiful and intuitive interface</p>
+            <h2 className="text-4xl font-bold mb-4">{t("shots_title")}</h2>
+            <p className="text-xl text-muted-foreground">{t("shots_sub")}</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="space-y-4">
-              <img 
-                src="https://images.unsplash.com/photo-1605902711834-8b11c3e3ef2f" 
-                alt="App screenshot 1"
-                className="rounded-xl shadow-lg w-full"
-              />
-              <p className="text-center font-medium">Browse Local Offers</p>
-            </div>
-            <div className="space-y-4">
-              <img 
-                src="https://images.unsplash.com/photo-1601972602237-8c79241e468b" 
-                alt="App screenshot 2"
-                className="rounded-xl shadow-lg w-full"
-              />
-              <p className="text-center font-medium">View Offer Details</p>
-            </div>
-            <div className="space-y-4">
-              <img 
-                src="https://images.unsplash.com/photo-1609921141835-710b7fa6e438" 
-                alt="App screenshot 3"
-                className="rounded-xl shadow-lg w-full"
-              />
-              <p className="text-center font-medium">Track Your Savings</p>
-            </div>
+            {[
+              { src: "https://images.unsplash.com/photo-1605902711834-8b11c3e3ef2f", cap: "shot1" },
+              { src: "https://images.unsplash.com/photo-1601972602237-8c79241e468b", cap: "shot2" },
+              { src: "https://images.unsplash.com/photo-1609921141835-710b7fa6e438", cap: "shot3" },
+            ].map((s, i) => (
+              <div key={s.cap} className="space-y-4">
+                <img src={s.src} alt={`App screenshot ${i + 1}`} className="rounded-xl shadow-lg w-full" />
+                <p className="text-center font-medium">{t(s.cap)}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -312,51 +245,16 @@ function App() {
       <section id="faq" className="py-16 px-4" data-testid="faq-section">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-muted-foreground">Everything you need to know</p>
+            <h2 className="text-4xl font-bold mb-4">{t("faq_title")}</h2>
+            <p className="text-xl text-muted-foreground">{t("faq_sub")}</p>
           </div>
           <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1" data-testid="faq-1">
-              <AccordionTrigger className="text-left">How does tiphop work?</AccordionTrigger>
-              <AccordionContent>
-                  tiphop connects you with nearby stores offering time-limited discounts. Simply open the app, enable location services, and browse offers in your area. When you find an offer you like, tap to redeem and show the QR code at checkout.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-2" data-testid="faq-2">
-              <AccordionTrigger className="text-left">Is the app really free for consumers?</AccordionTrigger>
-              <AccordionContent>
-                Yes! tiphop is 100% free for consumers — no subscription fees, hidden charges, or transaction fees. And it's completely free for stores too.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-3" data-testid="faq-3">
-              <AccordionTrigger className="text-left">How do I redeem an offer?</AccordionTrigger>
-              <AccordionContent>
-                Redemption is simple! Once you find an offer you want, tap the "Redeem" button in the app. A unique QR code will be generated. Show this code to the store at checkout, and they'll scan it to apply your discount instantly.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-4" data-testid="faq-4">
-              <AccordionTrigger className="text-left">Can I save offers for later?</AccordionTrigger>
-              <AccordionContent>
-                Absolutely! You can save any offer to your favorites list. However, keep in mind that many offers are time-sensitive, so we recommend redeeming them before they expire. You'll receive notifications if a saved offer is about to expire.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-5" data-testid="faq-5">
-              <AccordionTrigger className="text-left">I run a store. How do I get started?</AccordionTrigger>
-              <AccordionContent>
-                Getting started is easy — and completely free. Sign up for a store account through the app or our website, verify your business, and you can start posting offers immediately. There are no plans, subscription fees, or posting charges. Our team will guide you through the setup process.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="item-6" data-testid="faq-6">
-              <AccordionTrigger className="text-left">What types of businesses can use tiphop?</AccordionTrigger>
-              <AccordionContent>
-                Any local business with physical locations can use tiphop! This includes restaurants, cafes, retail stores, salons, fitness centers, entertainment venues, and service providers. If you have unused capacity or inventory you'd like to sell at a discount, tiphop is perfect for you.
-              </AccordionContent>
-            </AccordionItem>
+            {[1, 2, 3, 4, 5, 6].map((n) => (
+              <AccordionItem key={n} value={`item-${n}`} data-testid={`faq-${n}`}>
+                <AccordionTrigger className="text-left">{t(`faq${n}_q`)}</AccordionTrigger>
+                <AccordionContent>{t(`faq${n}_a`)}</AccordionContent>
+              </AccordionItem>
+            ))}
           </Accordion>
         </div>
       </section>
@@ -366,55 +264,53 @@ function App() {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-4xl md:text-5xl font-bold">Ready to Start Saving?</h2>
-              <p className="text-xl opacity-90">
-                Join thousands of users discovering amazing local offers every day. Open the app and get your first offer!
-              </p>
+              <h2 className="text-4xl md:text-5xl font-bold">{t("cta_title")}</h2>
+              <p className="text-xl opacity-90">{t("cta_sub")}</p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" variant="secondary" className="text-lg" data-testid="cta-download-btn">
-                  <a href={MOBILE_APP_URL}>Go to App</a>
+                  <a href={MOBILE_APP_URL}>{t("nav_cta")}</a>
                 </Button>
               </div>
             </div>
 
             <Card className="bg-white text-foreground" data-testid="contact-form">
               <CardHeader>
-                <CardTitle className="text-2xl">Get In Touch</CardTitle>
-                <CardDescription>Have questions? We'd love to hear from you.</CardDescription>
+                <CardTitle className="text-2xl">{t("contact_title")}</CardTitle>
+                <CardDescription>{t("contact_sub")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <Input 
-                      placeholder="Your Name" 
+                    <Input
+                      placeholder={t("form_name")}
                       value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
                       data-testid="contact-name-input"
                     />
                   </div>
                   <div>
-                    <Input 
-                      type="email" 
-                      placeholder="Your Email" 
+                    <Input
+                      type="email"
+                      placeholder={t("form_email")}
                       value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
                       data-testid="contact-email-input"
                     />
                   </div>
                   <div>
-                    <Textarea 
-                      placeholder="Your Message" 
+                    <Textarea
+                      placeholder={t("form_message")}
                       rows={4}
                       value={formData.message}
-                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       required
                       data-testid="contact-message-input"
                     />
                   </div>
-                  <Button type="submit" className="w-full" data-testid="contact-submit-btn">
-                    Send Message
+                  <Button type="submit" className="w-full" disabled={sending} data-testid="contact-submit-btn">
+                    {sending ? t("form_sending") : t("form_send")}
                   </Button>
                 </form>
               </CardContent>
@@ -432,36 +328,34 @@ function App() {
                 <img src={tiphopLogo} alt="tiphop" className="h-9 w-9 rounded-lg object-contain" />
                 <span>tiphop</span>
               </div>
-              <p className="text-muted-foreground">
-                Connecting consumers with local stores through time-limited discounts.
-              </p>
+              <p className="text-muted-foreground">{t("footer_tagline")}</p>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Product</h3>
+              <h3 className="font-semibold mb-4">{t("footer_product")}</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#features" className="hover:text-primary">Features</a></li>
-                <li><a href="#faq" className="hover:text-primary">FAQ</a></li>
+                <li><a href="#features" className="hover:text-primary">{t("nav_features")}</a></li>
+                <li><a href="#faq" className="hover:text-primary">{t("nav_faq")}</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Company</h3>
+              <h3 className="font-semibold mb-4">{t("footer_company")}</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-primary">About Us</a></li>
-                <li><a href="#" className="hover:text-primary">Careers</a></li>
-                <li><a href="#" className="hover:text-primary">Blog</a></li>
+                <li><a href="#" className="hover:text-primary">{t("footer_about")}</a></li>
+                <li><a href="#" className="hover:text-primary">{t("footer_careers")}</a></li>
+                <li><a href="#" className="hover:text-primary">{t("footer_blog")}</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Legal</h3>
+              <h3 className="font-semibold mb-4">{t("footer_legal")}</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-primary">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-primary">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-primary">Cookie Policy</a></li>
+                <li><a href="#" className="hover:text-primary">{t("footer_privacy")}</a></li>
+                <li><a href="#" className="hover:text-primary">{t("footer_terms")}</a></li>
+                <li><a href="#" className="hover:text-primary">{t("footer_cookies")}</a></li>
               </ul>
             </div>
           </div>
           <div className="border-t pt-8 text-center text-muted-foreground">
-            <p>(c) 2025 tiphop. All rights reserved.</p>
+            <p>{t("footer_rights")}</p>
           </div>
         </div>
       </footer>
