@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Clock, Bell, TrendingDown, Smartphone, Heart, UtensilsCrossed, Bookmark, Share2, ShieldCheck, Languages, Gift } from "lucide-react";
+import { MapPin, Clock, Bell, TrendingDown, Smartphone, Heart, UtensilsCrossed, Bookmark, Share2, ShieldCheck, Languages, Gift, Megaphone } from "lucide-react";
 import tiphopLogo from "@/assets/tiphop_logo.png";
 import { translations } from "@/translations";
 
@@ -165,6 +165,7 @@ function App() {
               { icon: Smartphone, tid: "feature-easy", t: "feat_qr_t", d: "feat_qr_d" },
               { icon: Languages, tid: "feature-localization", t: "feat_localization_t", d: "feat_localization_d" },
               { icon: Gift, tid: "feature-free", t: "feat_free_t", d: "feat_free_d" },
+              { icon: Megaphone, tid: "feature-reverse", t: "feat_reverse_t", d: "feat_reverse_d" },
             ].map((f) => {
               const Icon = f.icon;
               return (

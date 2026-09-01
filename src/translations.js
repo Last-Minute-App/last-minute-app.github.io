@@ -52,6 +52,9 @@ export const translations = {
     feat_free_t: "Always Free",
     feat_free_d:
       "100% free for shoppers and stores alike — no subscriptions, no hidden charges, no transaction fees.",
+    feat_reverse_t: "Ask for an Offer",
+    feat_reverse_d:
+      "No deal nearby? Anonymously nudge a local store to post one. Stores see the demand and can respond — you help bring the offers you want.",
 
     // How it works
     how_title: "How It Works",
@@ -170,6 +173,9 @@ export const translations = {
     feat_free_t: "Πάντα δωρεάν",
     feat_free_d:
       "100% δωρεάν τόσο για τους καταναλωτές όσο και για τα καταστήματα — χωρίς συνδρομές, κρυφές χρεώσεις ή προμήθειες συναλλαγών.",
+    feat_reverse_t: "Ζήτησε μια Προσφορά",
+    feat_reverse_d:
+      "Καμία προσφορά κοντά σου; Ζήτησε ανώνυμα από ένα τοπικό κατάστημα να ανεβάσει μία. Τα καταστήματα βλέπουν τη ζήτηση και μπορούν να ανταποκριθούν — βοηθάς να έρθουν οι προσφορές που θέλεις.",
 
     // How it works
     how_title: "Πώς Λειτουργεί",
