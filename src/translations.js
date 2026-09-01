@@ -49,9 +49,9 @@ export const translations = {
     feat_localization_t: "Your Language, Your Theme",
     feat_localization_d:
       "Full English & Greek support, light or dark mode, and installable on any phone — no app store required.",
-    feat_free_t: "Always Free",
+    feat_free_t: "Free to Start, Pay on Results",
     feat_free_d:
-      "100% free for shoppers and stores alike — no subscriptions, no hidden charges, no transaction fees.",
+      "Always free for shoppers. For stores, no subscriptions and no upfront fees — just a small commission on offers that are actually redeemed. You only pay when it works.",
     feat_reverse_t: "Ask for an Offer",
     feat_reverse_d:
       "No deal nearby? Anonymously nudge a local store to post one. Stores see the demand and can respond — you help bring the offers you want.",
@@ -170,9 +170,9 @@ export const translations = {
     feat_localization_t: "Η γλώσσα σου, το θέμα σου",
     feat_localization_d:
       "Πλήρης υποστήριξη Ελληνικών & Αγγλικών, φωτεινό ή σκούρο θέμα, και εγκατάσταση σε κάθε κινητό — χωρίς app store.",
-    feat_free_t: "Πάντα δωρεάν",
+    feat_free_t: "Δωρεάν Έναρξη, Πληρώνεις στα Αποτελέσματα",
     feat_free_d:
-      "100% δωρεάν τόσο για τους καταναλωτές όσο και για τα καταστήματα — χωρίς συνδρομές, κρυφές χρεώσεις ή προμήθειες συναλλαγών.",
+      "Πάντα δωρεάν για τους καταναλωτές. Για τα καταστήματα, χωρίς συνδρομές και χωρίς πάγιες χρεώσεις — μόνο μια μικρή προμήθεια στις προσφορές που όντως εξαργυρώνονται. Πληρώνεις μόνο όταν αποδίδει.",
     feat_reverse_t: "Ζήτησε μια Προσφορά",
     feat_reverse_d:
       "Καμία προσφορά κοντά σου; Ζήτησε ανώνυμα από ένα τοπικό κατάστημα να ανεβάσει μία. Τα καταστήματα βλέπουν τη ζήτηση και μπορούν να ανταποκριθούν — βοηθάς να έρθουν οι προσφορές που θέλεις.",
