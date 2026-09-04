@@ -342,18 +342,26 @@ function App() {
             </div>
             <div>
               <h3 className="font-semibold mb-4">{t("footer_company")}</h3>
+              {/* Careers and Blog were href="#" — a footer that lists pages
+                  which do not exist and never open is worse than a shorter
+                  footer, because every dead link reads as a broken site. What
+                  remains points somewhere real. */}
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-primary">{t("footer_about")}</a></li>
-                <li><a href="#" className="hover:text-primary">{t("footer_careers")}</a></li>
-                <li><a href="#" className="hover:text-primary">{t("footer_blog")}</a></li>
+                <li><a href="#features" className="hover:text-primary">{t("footer_about")}</a></li>
+                <li><a href="#contact" className="hover:text-primary">{t("nav_cta")}</a></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">{t("footer_legal")}</h3>
+              {/* These were href="#". Advertising a Privacy Policy that does
+                  not open is worse than not listing one, especially for a
+                  product handling personal data in the EU — so they now open
+                  the app's real terms-and-privacy screen. That screen states
+                  plainly that it is a pilot summary and that full legal
+                  documents replace it before general release. */}
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-primary">{t("footer_privacy")}</a></li>
-                <li><a href="#" className="hover:text-primary">{t("footer_terms")}</a></li>
-                <li><a href="#" className="hover:text-primary">{t("footer_cookies")}</a></li>
+                <li><a href={`${MOBILE_APP_URL}/terms`} className="hover:text-primary">{t("footer_privacy")}</a></li>
+                <li><a href={`${MOBILE_APP_URL}/terms`} className="hover:text-primary">{t("footer_terms")}</a></li>
               </ul>
             </div>
           </div>
