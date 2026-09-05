@@ -20,10 +20,10 @@ export const translations = {
     features_sub: "Everything you need to save money and discover amazing local offers",
     feat_location_t: "Location-Based Discovery",
     feat_location_d:
-      "Find offers from stores within your chosen radius — from 500m up to 50km. Never miss a deal right next door.",
+      "Find offers from stores within your chosen radius — from 500m up to 50km. Never miss an offer right next door.",
     feat_realtime_t: "Real-Time & Scheduled Offers",
     feat_realtime_d:
-      "Grab time-limited deals the moment they drop, and see what's starting later today. Stores push last-minute discounts to fill unused capacity.",
+      "Grab time-limited offers the moment they drop, and see what's starting later today. Stores push last-minute discounts to fill unused capacity.",
     feat_notifications_t: "Smart Notifications",
     feat_notifications_d:
       "Personalized alerts for your favorite categories and distance — with quiet hours so you're never pinged in the middle of the night.",
@@ -32,12 +32,12 @@ export const translations = {
       "Follow the stores you love and get notified the instant they post a new offer.",
     feat_dinein_t: "Dine-In Reservations",
     feat_dinein_d:
-      "Reserve a table deal for your whole party at a fixed price per person — perfect for food, drinks, and sweets.",
+      "Reserve a table offer for your whole party at a fixed price per person — perfect for food, drinks, and sweets.",
     feat_bookmark_t: "Save & Get Reminded",
     feat_bookmark_d:
       "Bookmark a scheduled offer and we'll notify you the moment it goes live — so you're first in line.",
     feat_share_t: "Share Offers",
-    feat_share_d: "Found a great deal? Share it with friends and family in a single tap.",
+    feat_share_d: "Found a great offer? Share it with friends and family in a single tap.",
     feat_verified_t: "Verified Stores & Ratings",
     feat_verified_d:
       "Every store is verified and rated by the community. Book and buy with confidence.",
@@ -54,7 +54,7 @@ export const translations = {
       "Always free for shoppers. For stores, no subscriptions and no upfront fees — just a small commission on offers that are actually redeemed. You only pay when it works.",
     feat_reverse_t: "Ask for an Offer",
     feat_reverse_d:
-      "No deal nearby? Anonymously nudge a local store to post one. Stores see the demand and can respond — you help bring the offers you want.",
+      "No offer nearby? Anonymously nudge a local store to post one. Stores see the demand and can respond — you help bring the offers you want.",
 
     // How it works
     how_title: "How It Works",
