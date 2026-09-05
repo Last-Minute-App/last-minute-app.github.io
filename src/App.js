@@ -26,6 +26,53 @@ const MOBILE_APP_URL = "/dashboard/";
 const CONTACT_EMAIL = "tiphop.app@gmail.com";
 const CONTACT_ENDPOINT = "https://last-minute-app-904761941913.europe-west1.run.app/api/contact";
 
+// Landing traffic — OUR OWN API, no third party. Replaces the PostHog snippet
+// removed on 2026-09-05. Aggregate-only on the server: a day counter, never a
+// row per person, so there is no identifier to store or consent to collect.
+//
+// `sessionStorage` is what makes "unique visits" possible without tracking. It
+// is cleared when the tab closes, never leaves the browser, and is not sent
+// anywhere — we transmit only the BOOLEAN "is this the first hit of this
+// session". Nothing here can recognise a returning visitor tomorrow, which is
+// exactly the property that keeps this consent-free.
+const VISIT_ENDPOINT = "https://last-minute-app-904761941913.europe-west1.run.app/api/landing/visit";
+const VISIT_SESSION_KEY = "tiphop_visit_session";
+
+/** Where this visitor came from — a UTM tag we control, else the referring
+ *  HOSTNAME (never the full URL, which can carry personal data in its query
+ *  string), else nothing, which the server files as "(direct)".
+ *
+ *  Expect a lot of "(direct)": Instagram, Facebook and most apps strip the
+ *  referrer header, so UTM tags on our own links are the reliable signal. */
+function visitSource() {
+  try {
+    const utm = new URLSearchParams(window.location.search).get("utm_source");
+    if (utm) return utm.slice(0, 120);
+    const ref = document.referrer;
+    if (!ref) return null;
+    const host = new URL(ref).hostname;
+    // Our own pages are not a traffic source.
+    if (host === window.location.hostname) return null;
+    return host.slice(0, 120);
+  } catch {
+    return null;
+  }
+}
+
+/** Fire-and-forget. Never awaited, never surfaced: a counter must not be able
+ *  to slow the page down or show a visitor an error. `keepalive` lets the
+ *  request outlive the click that navigates away. */
+function recordVisit(kind, newSession) {
+  try {
+    fetch(VISIT_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ kind, source: visitSource(), new_session: !!newSession }),
+      keepalive: true,
+    }).catch(() => {});
+  } catch { /* never breaks the page */ }
+}
+
 function App() {
   const [lang, setLang] = useState(() => {
     try {
@@ -46,6 +93,23 @@ function App() {
   useEffect(() => {
     try { document.documentElement.lang = lang; } catch { /* noop */ }
   }, [lang]);
+
+  // One count per page load; `new_session` only on the first load of a browser
+  // session, which is what makes the admin's "unique visits" figure meaningful.
+  // Empty dep array: this must fire once per load, never on a language switch.
+  useEffect(() => {
+    let firstOfSession = false;
+    try {
+      if (!sessionStorage.getItem(VISIT_SESSION_KEY)) {
+        sessionStorage.setItem(VISIT_SESSION_KEY, "1");
+        firstOfSession = true;
+      }
+    } catch {
+      // Private mode / storage blocked: still count the view, just never claim
+      // it is a distinct session. Undercounting sessions beats inventing them.
+    }
+    recordVisit("view", firstOfSession);
+  }, []);
 
   const [formData, setFormData] = useState({ name: "", email: "", message: "", company: "" });
   const [sending, setSending] = useState(false);
@@ -111,7 +175,7 @@ function App() {
               ))}
             </div>
             <Button asChild data-testid="nav-download-btn">
-              <a href={MOBILE_APP_URL}>{t("nav_cta")}</a>
+              <a href={MOBILE_APP_URL} onClick={() => recordVisit("app_click", false)}>{t("nav_cta")}</a>
             </Button>
           </div>
         </div>
@@ -129,7 +193,7 @@ function App() {
               <p className="text-xl text-muted-foreground">{t("hero_sub")}</p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="text-lg" data-testid="hero-download-btn">
-                  <a href={MOBILE_APP_URL}>{t("nav_cta")}</a>
+                  <a href={MOBILE_APP_URL} onClick={() => recordVisit("app_click", false)}>{t("nav_cta")}</a>
                 </Button>
               </div>
             </div>
@@ -258,7 +322,7 @@ function App() {
               <p className="text-xl opacity-90">{t("cta_sub")}</p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" variant="secondary" className="text-lg" data-testid="cta-download-btn">
-                  <a href={MOBILE_APP_URL}>{t("nav_cta")}</a>
+                  <a href={MOBILE_APP_URL} onClick={() => recordVisit("app_click", false)}>{t("nav_cta")}</a>
                 </Button>
               </div>
             </div>
