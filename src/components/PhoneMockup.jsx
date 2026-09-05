@@ -49,6 +49,9 @@ const COPY = {
     backup: "Backup code",
     ready: "Ready to redeem — hop over!",
     pickup: "Take-away",
+    hm: (h, m) => `${h}h ${m}m`,
+    shop1: "Bakery Stari", item1: "Butter croissants ×4",
+    shop2: "Kouzina", item2: "Soup of the day",
     tabs: ["Explore", "Map", "My Offers", "Profile"],
     about: "About this offer",
     desc: "Fresh this morning, and too good to bin at closing.",
@@ -66,6 +69,9 @@ const COPY = {
     backup: "Εφεδρικός Κωδικός",
     ready: "Έτοιμη για εξαργύρωση — πέρνα!",
     pickup: "Παραλαβή",
+    hm: (h, m) => `${h}ώ ${m}λ`,
+    shop1: "Φούρνος Στάρι", item1: "Κρουασάν βουτύρου ×4",
+    shop2: "Κουζίνα", item2: "Σούπα ημέρας",
     tabs: ["Εξερεύνηση", "Χάρτης", "Προσφορές μου", "Προφίλ"],
     about: "Σχετικά με την προσφορά",
     desc: "Φρέσκα από το πρωί — κρίμα να πάνε χαμένα.",
@@ -168,8 +174,8 @@ export default function PhoneMockup({ screen = "explore", lang = "en", className
                 <Chip>{t.bakery}</Chip>
               </div>
               <div style={{ display: "grid", gap: 7 }}>
-                <OfferCard t={t} title="Butter croissants ×4" shop="Bakery Stari" was="8,00 €" now="4,80 €" off="40" time="5ώ 43λ" tag={`3 ${t.left}`} />
-                <OfferCard t={t} title="Soup of the day" shop="Kouzina" was="6,50 €" now="3,25 €" off="50" time="1ώ 12λ" tag={t.pickup} />
+                <OfferCard t={t} title={t.item1} shop={t.shop1} was="8,00 €" now="4,80 €" off="40" time={t.hm(5, 43)} tag={`3 ${t.left}`} />
+                <OfferCard t={t} title={t.item2} shop={t.shop2} was="6,50 €" now="3,25 €" off="50" time={t.hm(1, 12)} tag={t.pickup} />
               </div>
             </>
           )}
@@ -181,8 +187,8 @@ export default function PhoneMockup({ screen = "explore", lang = "en", className
                   −40%
                 </span>
               </div>
-              <div style={{ fontSize: 8, color: C.muted, fontWeight: 700, textTransform: "uppercase" }}>Bakery Stari</div>
-              <div style={{ fontSize: 13, fontWeight: 900, color: C.text, lineHeight: 1.2 }}>Butter croissants ×4</div>
+              <div style={{ fontSize: 8, color: C.muted, fontWeight: 700, textTransform: "uppercase" }}>{t.shop1}</div>
+              <div style={{ fontSize: 13, fontWeight: 900, color: C.text, lineHeight: 1.2 }}>{t.item1}</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginTop: 6 }}>
                 <span style={{ fontSize: 18, fontWeight: 900, color: C.success }}>4,80 €</span>
                 <span style={{ fontSize: 10, color: C.faint, textDecoration: "line-through" }}>8,00 €</span>

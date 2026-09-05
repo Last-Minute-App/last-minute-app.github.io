@@ -71,7 +71,7 @@ export const translations = {
     shots_sub: "A glimpse of our beautiful and intuitive interface",
     shot1: "Browse Local Offers",
     shot2: "View Offer Details",
-    shot3: "Track Your Savings",
+    shot3: "Redeem in Seconds",
 
     // FAQ
     faq_title: "Frequently Asked Questions",
@@ -192,7 +192,7 @@ export const translations = {
     shots_sub: "Μια ματιά στο όμορφο και εύχρηστο περιβάλλον μας",
     shot1: "Περιήγηση σε τοπικές προσφορές",
     shot2: "Λεπτομέρειες προσφοράς",
-    shot3: "Παρακολούθηση εξοικονόμησης",
+    shot3: "Εξαργύρωση σε δευτερόλεπτα",
 
     // FAQ
     faq_title: "Συχνές Ερωτήσεις",
