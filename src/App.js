@@ -360,8 +360,8 @@ function App() {
                   plainly that it is a pilot summary and that full legal
                   documents replace it before general release. */}
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href={`${MOBILE_APP_URL}/terms`} className="hover:text-primary">{t("footer_privacy")}</a></li>
-                <li><a href={`${MOBILE_APP_URL}/terms`} className="hover:text-primary">{t("footer_terms")}</a></li>
+                <li><a href={`${MOBILE_APP_URL}terms`} className="hover:text-primary">{t("footer_privacy")}</a></li>
+                <li><a href={`${MOBILE_APP_URL}terms`} className="hover:text-primary">{t("footer_terms")}</a></li>
               </ul>
             </div>
           </div>
