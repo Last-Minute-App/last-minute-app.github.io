@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Clock, Bell, TrendingDown, Smartphone, Heart, UtensilsCrossed, Bookmark, Share2, ShieldCheck, Languages, Gift, Megaphone } from "lucide-react";
 import tiphopLogo from "@/assets/tiphop_logo.png";
 import { translations } from "@/translations";
+import PhoneMockup from "@/components/PhoneMockup";
 
 // Root-relative on purpose: this site is served from BOTH
 // last-minute-app.github.io and the custom domain tiphop.gr, and the app
@@ -197,12 +198,11 @@ function App() {
                 </Button>
               </div>
             </div>
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwzfHxtb2JpbGUlMjBtYXJrZXRwbGFjZXxlbnwwfHx8fDE3Nzk1MzI5NzN8MA&ixlib=rb-4.1.0&q=85"
-                alt="Mobile marketplace app"
-                className="rounded-2xl shadow-2xl"
-              />
+            {/* Was a stock photo of an unrelated app. This is our own Explore
+                screen, drawn from the app's real design tokens — on-message,
+                and it cannot 404 or slow the page like a hotlinked image. */}
+            <div className="relative flex justify-center">
+              <PhoneMockup screen="explore" lang={lang} />
             </div>
           </div>
         </div>
@@ -280,14 +280,18 @@ function App() {
             <h2 className="text-4xl font-bold mb-4">{t("shots_title")}</h2>
             <p className="text-xl text-muted-foreground">{t("shots_sub")}</p>
           </div>
+          {/* These were three Unsplash photos with alt="App screenshot N" under a
+              heading promising screenshots — one of them a meditation app. Now
+              the three real screens: find an offer, see what you save, show the
+              code. */}
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { src: "https://images.unsplash.com/photo-1605902711834-8b11c3e3ef2f", cap: "shot1" },
-              { src: "https://images.unsplash.com/photo-1601972602237-8c79241e468b", cap: "shot2" },
-              { src: "https://images.unsplash.com/photo-1609921141835-710b7fa6e438", cap: "shot3" },
-            ].map((s, i) => (
+              { screen: "explore", cap: "shot1" },
+              { screen: "offer", cap: "shot2" },
+              { screen: "redeem", cap: "shot3" },
+            ].map((s) => (
               <div key={s.cap} className="space-y-4">
-                <img src={s.src} alt={`App screenshot ${i + 1}`} className="rounded-xl shadow-lg w-full" />
+                <PhoneMockup screen={s.screen} lang={lang} />
                 <p className="text-center font-medium">{t(s.cap)}</p>
               </div>
             ))}
