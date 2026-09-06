@@ -13,6 +13,13 @@
 
 # misc
 .DS_Store
+# Create React App ignores the *.local variants but NOT a bare `.env`, which is
+# the file most likely to hold a real secret. The other three repos ignore it;
+# this one did not. Nothing sensitive is tracked here today — this closes it
+# before it matters, because a secret committed to git history is not really
+# removable afterwards.
+.env
+.env.production
 .env.local
 .env.development.local
 .env.test.local
