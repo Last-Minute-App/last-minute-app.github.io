@@ -32,7 +32,16 @@
              job in browsers that honour it. -->
         <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
-        <link rel="icon" type="image/png" href="%PUBLIC_URL%/tiphop_logo.png" />
+        <!-- Icons. The 512x512 logo used to be the favicon: browsers scaled it
+             down to 16px, so every visitor downloaded 106 KB to render a
+             16-pixel image. And /favicon.ico 404d — Chrome requests that path
+             regardless of what is declared here, and some link-preview bots and
+             feed readers look ONLY for it. Both fixed; sizes are declared so a
+             browser picks the right file instead of resampling a large one. -->
+        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet" />
