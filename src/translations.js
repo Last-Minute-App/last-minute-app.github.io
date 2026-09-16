@@ -87,7 +87,7 @@ export const translations = {
       "Redemption is simple! Once you find an offer you want, tap the “Redeem” button in the app. A unique QR code will be generated. Show this code to the store at checkout, and they'll scan it to apply your discount instantly.",
     faq4_q: "Can I save offers for later?",
     faq4_a:
-      "Absolutely! You can save any offer to your favorites list. However, keep in mind that many offers are time-sensitive, so we recommend redeeming them before they expire. You'll receive notifications if a saved offer is about to expire.",
+      "Yes! On an offer that starts later, tap “Notify me when live” and we'll let you know the moment it goes live. If it's about to end and you still haven't claimed it, we'll send you a reminder before it closes.",
     faq5_q: "I run a store. How do I get started?",
     faq5_a:
       "Getting started is easy, with nothing to pay upfront. Sign up for a store account through the app or our website and you can start posting offers immediately. There are no plans, subscription fees, or posting charges — just a small commission on offers that are actually redeemed. Our team will guide you through the setup process.",
@@ -208,7 +208,7 @@ export const translations = {
       "Η εξαργύρωση είναι απλή! Μόλις βρεις μια προσφορά που θέλεις, πάτησε το κουμπί “Εξαργύρωση” στην εφαρμογή. Θα δημιουργηθεί ένας μοναδικός κωδικός QR. Δείξε τον στο κατάστημα στο ταμείο και θα τον σαρώσει για να εφαρμόσει άμεσα την έκπτωσή σου.",
     faq4_q: "Μπορώ να αποθηκεύσω προσφορές για αργότερα;",
     faq4_a:
-      "Φυσικά! Μπορείς να αποθηκεύσεις οποιαδήποτε προσφορά στα αγαπημένα σου. Ωστόσο, να θυμάσαι ότι πολλές προσφορές είναι χρονικά περιορισμένες, γι' αυτό προτείνουμε να τις εξαργυρώνεις πριν λήξουν. Θα λαμβάνεις ειδοποιήσεις όταν μια αποθηκευμένη προσφορά πρόκειται να λήξει.",
+      "Ναι! Σε μια προσφορά που ξεκινά αργότερα, πάτησε «Ειδοποίηση όταν ξεκινήσει» και θα σε ενημερώσουμε μόλις γίνει ενεργή. Αν πλησιάζει να λήξει και δεν την έχεις δεσμεύσει ακόμα, θα σου στείλουμε υπενθύμιση πριν κλείσει.",
     faq5_q: "Έχω κατάστημα. Πώς ξεκινάω;",
     faq5_a:
       "Το ξεκίνημα είναι εύκολο, χωρίς καμία προκαταβολική χρέωση. Δημιούργησε λογαριασμό καταστήματος μέσω της εφαρμογής ή του ιστότοπού μας και μπορείς να ξεκινήσεις να ανεβάζεις προσφορές αμέσως. Δεν υπάρχουν πακέτα, συνδρομές ή χρεώσεις ανάρτησης — μόνο μια μικρή προμήθεια στις προσφορές που όντως εξαργυρώνονται. Η ομάδα μας θα σε καθοδηγήσει σε όλη τη διαδικασία.",
