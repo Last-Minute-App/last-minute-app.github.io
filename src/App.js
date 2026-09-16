@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Clock, Bell, TrendingDown, Smartphone, Heart, UtensilsCrossed, Bookmark, Share2, ShieldCheck, Languages, Gift, Megaphone } from "lucide-react";
+import { MapPin, Clock, Bell, TrendingDown, Smartphone, Heart, UtensilsCrossed, Bookmark, Share2, Star, Languages, Gift, Megaphone } from "lucide-react";
 import tiphopLogo from "@/assets/tiphop_logo.png";
 import { translations } from "@/translations";
 import PhoneMockup from "@/components/PhoneMockup";
@@ -224,7 +224,7 @@ function App() {
               { icon: UtensilsCrossed, tid: "feature-dinein", t: "feat_dinein_t", d: "feat_dinein_d" },
               { icon: Bookmark, tid: "feature-bookmark", t: "feat_bookmark_t", d: "feat_bookmark_d" },
               { icon: Share2, tid: "feature-share", t: "feat_share_t", d: "feat_share_d" },
-              { icon: ShieldCheck, tid: "feature-merchants", t: "feat_verified_t", d: "feat_verified_d" },
+              { icon: Star, tid: "feature-merchants", t: "feat_verified_t", d: "feat_verified_d" },
               { icon: TrendingDown, tid: "feature-savings", t: "feat_savings_t", d: "feat_savings_d" },
               { icon: Smartphone, tid: "feature-easy", t: "feat_qr_t", d: "feat_qr_d" },
               { icon: Languages, tid: "feature-localization", t: "feat_localization_t", d: "feat_localization_d" },

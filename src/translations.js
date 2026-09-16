@@ -38,9 +38,9 @@ export const translations = {
       "Bookmark a scheduled offer and we'll notify you the moment it goes live — so you're first in line.",
     feat_share_t: "Share Offers",
     feat_share_d: "Found a great offer? Share it with friends and family in a single tap.",
-    feat_verified_t: "Verified Stores & Ratings",
+    feat_verified_t: "Real Customer Ratings",
     feat_verified_d:
-      "Every store is verified and rated by the community. Book and buy with confidence.",
+      "Every store shows a star rating from customers who actually redeemed an offer there. Book and buy with confidence.",
     feat_savings_t: "Track Your Savings",
     feat_savings_d:
       "Save up to 70% on local products and services, and watch your total savings add up over time.",
@@ -81,7 +81,7 @@ export const translations = {
       "tiphop connects you with nearby stores offering time-limited discounts. Simply open the app, enable location services, and browse offers in your area. When you find an offer you like, tap to redeem and show the QR code at checkout.",
     faq2_q: "Is the app really free for consumers?",
     faq2_a:
-      "Yes! tiphop is 100% free for consumers — no subscription fees, hidden charges, or transaction fees. And it's completely free for stores too.",
+      "Yes! tiphop is 100% free for consumers — no subscription fees, hidden charges, or transaction fees. For stores, there are no subscriptions or upfront fees — just a small commission on offers that are actually redeemed.",
     faq3_q: "How do I redeem an offer?",
     faq3_a:
       "Redemption is simple! Once you find an offer you want, tap the “Redeem” button in the app. A unique QR code will be generated. Show this code to the store at checkout, and they'll scan it to apply your discount instantly.",
@@ -90,7 +90,7 @@ export const translations = {
       "Absolutely! You can save any offer to your favorites list. However, keep in mind that many offers are time-sensitive, so we recommend redeeming them before they expire. You'll receive notifications if a saved offer is about to expire.",
     faq5_q: "I run a store. How do I get started?",
     faq5_a:
-      "Getting started is easy — and completely free. Sign up for a store account through the app or our website, verify your business, and you can start posting offers immediately. There are no plans, subscription fees, or posting charges. Our team will guide you through the setup process.",
+      "Getting started is easy, with nothing to pay upfront. Sign up for a store account through the app or our website and you can start posting offers immediately. There are no plans, subscription fees, or posting charges — just a small commission on offers that are actually redeemed. Our team will guide you through the setup process.",
     faq6_q: "What types of businesses can use tiphop?",
     faq6_a:
       "Any local business with physical locations can use tiphop! This includes restaurants, cafes, retail stores, salons, fitness centers, entertainment venues, and service providers. If you have unused capacity or inventory you'd like to sell at a discount, tiphop is perfect for you.",
@@ -159,9 +159,9 @@ export const translations = {
       "Αποθήκευσε μια προγραμματισμένη προσφορά και θα σε ειδοποιήσουμε μόλις ενεργοποιηθεί — για να είσαι πρώτος στη σειρά.",
     feat_share_t: "Μοιράσου προσφορές",
     feat_share_d: "Βρήκες μια εξαιρετική προσφορά; Μοιράσου την με φίλους και οικογένεια με ένα άγγιγμα.",
-    feat_verified_t: "Επιβεβαιωμένα καταστήματα & αξιολογήσεις",
+    feat_verified_t: "Πραγματικές αξιολογήσεις πελατών",
     feat_verified_d:
-      "Κάθε κατάστημα είναι επιβεβαιωμένο και αξιολογημένο από την κοινότητα. Κράτησε και αγόρασε με σιγουριά.",
+      "Κάθε κατάστημα έχει βαθμολογία από πελάτες που εξαργύρωσαν πραγματικά μια προσφορά εκεί. Κράτησε και αγόρασε με σιγουριά.",
     feat_savings_t: "Παρακολούθησε την εξοικονόμησή σου",
     feat_savings_d:
       "Εξοικονόμησε έως και 70% σε τοπικά προϊόντα και υπηρεσίες και δες τη συνολική σου εξοικονόμηση να μεγαλώνει με τον καιρό.",
@@ -202,7 +202,7 @@ export const translations = {
       "Το tiphop σε συνδέει με κοντινά καταστήματα που προσφέρουν χρονικά περιορισμένες εκπτώσεις. Άνοιξε την εφαρμογή, ενεργοποίησε την τοποθεσία και περιηγήσου στις προσφορές της περιοχής σου. Όταν βρεις μια προσφορά που σου αρέσει, πάτησε για εξαργύρωση και δείξε τον κωδικό QR στο ταμείο.",
     faq2_q: "Είναι πραγματικά δωρεάν η εφαρμογή για τους καταναλωτές;",
     faq2_a:
-      "Ναι! Το tiphop είναι 100% δωρεάν για τους καταναλωτές — χωρίς συνδρομές, κρυφές χρεώσεις ή προμήθειες συναλλαγών. Και είναι εντελώς δωρεάν και για τα καταστήματα.",
+      "Ναι! Το tiphop είναι 100% δωρεάν για τους καταναλωτές — χωρίς συνδρομές, κρυφές χρεώσεις ή προμήθειες συναλλαγών. Για τα καταστήματα, χωρίς συνδρομές και χωρίς πάγιες χρεώσεις — μόνο μια μικρή προμήθεια στις προσφορές που όντως εξαργυρώνονται.",
     faq3_q: "Πώς εξαργυρώνω μια προσφορά;",
     faq3_a:
       "Η εξαργύρωση είναι απλή! Μόλις βρεις μια προσφορά που θέλεις, πάτησε το κουμπί “Εξαργύρωση” στην εφαρμογή. Θα δημιουργηθεί ένας μοναδικός κωδικός QR. Δείξε τον στο κατάστημα στο ταμείο και θα τον σαρώσει για να εφαρμόσει άμεσα την έκπτωσή σου.",
@@ -211,7 +211,7 @@ export const translations = {
       "Φυσικά! Μπορείς να αποθηκεύσεις οποιαδήποτε προσφορά στα αγαπημένα σου. Ωστόσο, να θυμάσαι ότι πολλές προσφορές είναι χρονικά περιορισμένες, γι' αυτό προτείνουμε να τις εξαργυρώνεις πριν λήξουν. Θα λαμβάνεις ειδοποιήσεις όταν μια αποθηκευμένη προσφορά πρόκειται να λήξει.",
     faq5_q: "Έχω κατάστημα. Πώς ξεκινάω;",
     faq5_a:
-      "Το ξεκίνημα είναι εύκολο — και εντελώς δωρεάν. Δημιούργησε λογαριασμό καταστήματος μέσω της εφαρμογής ή του ιστότοπού μας, επιβεβαίωσε την επιχείρησή σου και μπορείς να ξεκινήσεις να ανεβάζεις προσφορές αμέσως. Δεν υπάρχουν πακέτα, συνδρομές ή χρεώσεις ανάρτησης. Η ομάδα μας θα σε καθοδηγήσει σε όλη τη διαδικασία.",
+      "Το ξεκίνημα είναι εύκολο, χωρίς καμία προκαταβολική χρέωση. Δημιούργησε λογαριασμό καταστήματος μέσω της εφαρμογής ή του ιστότοπού μας και μπορείς να ξεκινήσεις να ανεβάζεις προσφορές αμέσως. Δεν υπάρχουν πακέτα, συνδρομές ή χρεώσεις ανάρτησης — μόνο μια μικρή προμήθεια στις προσφορές που όντως εξαργυρώνονται. Η ομάδα μας θα σε καθοδηγήσει σε όλη τη διαδικασία.",
     faq6_q: "Τι είδους επιχειρήσεις μπορούν να χρησιμοποιήσουν το tiphop;",
     faq6_a:
       "Οποιαδήποτε τοπική επιχείρηση με φυσικό σημείο μπορεί να χρησιμοποιήσει το tiphop! Περιλαμβάνονται εστιατόρια, καφετέριες, καταστήματα λιανικής, κομμωτήρια, γυμναστήρια, χώροι ψυχαγωγίας και πάροχοι υπηρεσιών. Αν έχεις αδιάθετη διαθεσιμότητα ή απόθεμα που θέλεις να πουλήσεις σε έκπτωση, το tiphop είναι ιδανικό για σένα.",
