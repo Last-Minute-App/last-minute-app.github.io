@@ -318,7 +318,8 @@ function App() {
       </section>
 
       {/* CTA Section with Contact Form */}
-      <section className="py-16 px-4 bg-primary text-primary-foreground" data-testid="cta-section">
+      {/* id="contact": the footer links here. Without it that link did nothing. */}
+      <section id="contact" className="py-16 px-4 bg-primary text-primary-foreground" data-testid="cta-section">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">

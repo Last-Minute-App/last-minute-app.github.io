@@ -22,6 +22,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Past landing bugs (missing link previews, dead footer links, double
+      # slashes, "deal" wording, un-ignored .env) must not ship again. Runs
+      # before the build so a failure stops the deploy. Python is preinstalled.
+      - name: Guard — past landing bugs stay fixed
+        run: python3 scripts/check-landing.py
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
