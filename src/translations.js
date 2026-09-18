@@ -120,7 +120,7 @@ export const translations = {
     footer_privacy: "Privacy Policy",
     footer_terms: "Terms of Service",
     footer_cookies: "Cookie Policy",
-    footer_rights: "(c) 2025 tiphop. All rights reserved.",
+    footer_rights: "© {year} tiphop. All rights reserved.",
   },
 
   el: {
@@ -241,6 +241,6 @@ export const translations = {
     footer_privacy: "Πολιτική Απορρήτου",
     footer_terms: "Όροι Χρήσης",
     footer_cookies: "Πολιτική Cookies",
-    footer_rights: "(c) 2025 tiphop. Με επιφύλαξη παντός δικαιώματος.",
+    footer_rights: "© {year} tiphop. Με επιφύλαξη παντός δικαιώματος.",
   },
 };

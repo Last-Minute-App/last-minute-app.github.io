@@ -435,7 +435,7 @@ function App() {
             </div>
           </div>
           <div className="border-t pt-8 text-center text-muted-foreground">
-            <p>{t("footer_rights")}</p>
+            <p>{t("footer_rights").replace("{year}", new Date().getFullYear())}</p>
           </div>
         </div>
       </footer>

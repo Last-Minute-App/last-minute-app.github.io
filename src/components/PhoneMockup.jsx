@@ -10,8 +10,11 @@
  * off-message and, for the three under that heading, not true.
  *
  * These are drawn from the app's REAL design tokens and real layout:
- *   primary #FF6B35 · background #F8F9FA · surface #FFFFFF
- *   text #0F1B2D · success #059669
+ *   primary #FF6B35 (icons/dots) · primaryText/primaryFill #C2410C (small
+ *   text, fills under white) · background #F8F9FA · surface #FFFFFF
+ *   text #0F1B2D · muted #5B6472 · faint #65707E · successText #047857
+ * These follow the app's 2026-09-18 contrast pass (build v445), so the drawn
+ * screens pass WCAG AA like the real ones do.
  * (src/theme/colors.ts in the mobile repo — keep them in step if that changes.)
  *
  * Why not literal screenshots: a real capture of the live feed would publish
@@ -25,12 +28,14 @@
 
 const C = {
   primary: "#FF6B35",
+  primaryText: "#C2410C",
+  primaryFill: "#C2410C",
   bg: "#F8F9FA",
   surface: "#FFFFFF",
   text: "#0F1B2D",
-  muted: "#6B7280",
-  faint: "#9CA3AF",
-  success: "#059669",
+  muted: "#5B6472",
+  faint: "#65707E",
+  successText: "#047857",
   border: "#E5E7EB",
   chip: "#F3F4F6",
 };
@@ -92,7 +97,7 @@ function QrArt() {
     }
   }
   return (
-    <svg viewBox="0 0 99 99" width="112" height="112" role="img" aria-label="">
+    <svg viewBox="0 0 99 99" width="112" height="112" aria-hidden="true" focusable="false">
       <rect width="99" height="99" fill="#fff" />
       {cells}
     </svg>
@@ -109,7 +114,7 @@ function Chip({ children, active }) {
         borderRadius: 999,
         whiteSpace: "nowrap",
         color: active ? "#fff" : C.muted,
-        background: active ? C.primary : C.chip,
+        background: active ? C.primaryFill : C.chip,
       }}
     >
       {children}
@@ -121,7 +126,7 @@ function OfferCard({ t, title, shop, was, now, off, time, tag }) {
   return (
     <div style={{ background: C.surface, borderRadius: 12, overflow: "hidden", boxShadow: "0 1px 3px rgba(15,27,45,.10)" }}>
       <div style={{ position: "relative", height: 58, background: "linear-gradient(135deg,#FFE8DE,#FFD2BF)" }}>
-        <span style={{ position: "absolute", top: 6, left: 6, background: C.primary, color: "#fff", fontSize: 9, fontWeight: 800, padding: "3px 6px", borderRadius: 6 }}>
+        <span style={{ position: "absolute", top: 6, left: 6, background: C.primaryFill, color: "#fff", fontSize: 9, fontWeight: 800, padding: "3px 6px", borderRadius: 6 }}>
           −{off}%
         </span>
         <span style={{ position: "absolute", top: 6, right: 6, background: "rgba(17,24,39,.72)", color: "#fff", fontSize: 8, fontWeight: 800, padding: "3px 6px", borderRadius: 999 }}>
@@ -132,7 +137,7 @@ function OfferCard({ t, title, shop, was, now, off, time, tag }) {
         <div style={{ fontSize: 8, color: C.muted, fontWeight: 700, textTransform: "uppercase", letterSpacing: .3 }}>{shop}</div>
         <div style={{ fontSize: 11, fontWeight: 800, color: C.text, marginTop: 1, lineHeight: 1.2 }}>{title}</div>
         <div style={{ display: "flex", alignItems: "baseline", gap: 5, marginTop: 5 }}>
-          <span style={{ fontSize: 13, fontWeight: 900, color: C.success }}>{now}</span>
+          <span style={{ fontSize: 13, fontWeight: 900, color: C.successText }}>{now}</span>
           <span style={{ fontSize: 9, color: C.faint, textDecoration: "line-through" }}>{was}</span>
           <span style={{ marginLeft: "auto", fontSize: 8, color: C.muted, background: C.chip, padding: "2px 6px", borderRadius: 999 }}>{tag}</span>
         </div>
@@ -183,22 +188,22 @@ export default function PhoneMockup({ screen = "explore", lang = "en", className
           {screen === "offer" && (
             <>
               <div style={{ height: 74, borderRadius: 12, background: "linear-gradient(135deg,#FFE8DE,#FFC7AE)", position: "relative", marginBottom: 9 }}>
-                <span style={{ position: "absolute", bottom: 6, left: 6, background: C.primary, color: "#fff", fontSize: 10, fontWeight: 900, padding: "4px 8px", borderRadius: 7 }}>
+                <span style={{ position: "absolute", bottom: 6, left: 6, background: C.primaryFill, color: "#fff", fontSize: 10, fontWeight: 900, padding: "4px 8px", borderRadius: 7 }}>
                   −40%
                 </span>
               </div>
               <div style={{ fontSize: 8, color: C.muted, fontWeight: 700, textTransform: "uppercase" }}>{t.shop1}</div>
               <div style={{ fontSize: 13, fontWeight: 900, color: C.text, lineHeight: 1.2 }}>{t.item1}</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginTop: 6 }}>
-                <span style={{ fontSize: 18, fontWeight: 900, color: C.success }}>4,80 €</span>
+                <span style={{ fontSize: 18, fontWeight: 900, color: C.successText }}>4,80 €</span>
                 <span style={{ fontSize: 10, color: C.faint, textDecoration: "line-through" }}>8,00 €</span>
               </div>
-              <div style={{ fontSize: 8, color: C.success, fontWeight: 700, background: "#ECFDF5", display: "inline-block", padding: "3px 7px", borderRadius: 999, marginTop: 5 }}>
+              <div style={{ fontSize: 8, color: C.successText, fontWeight: 700, background: "#ECFDF5", display: "inline-block", padding: "3px 7px", borderRadius: 999, marginTop: 5 }}>
                 {t.save} 3,20 €
               </div>
               <div style={{ fontSize: 9, fontWeight: 800, color: C.text, marginTop: 10 }}>{t.about}</div>
               <div style={{ fontSize: 8.5, color: C.muted, lineHeight: 1.45, marginTop: 2 }}>{t.desc}</div>
-              <div style={{ marginTop: 12, background: C.primary, color: "#fff", textAlign: "center", fontSize: 11, fontWeight: 800, padding: "9px 0", borderRadius: 10 }}>
+              <div style={{ marginTop: 12, background: C.primaryFill, color: "#fff", textAlign: "center", fontSize: 11, fontWeight: 800, padding: "9px 0", borderRadius: 10 }}>
                 {t.claim}
               </div>
             </>
@@ -207,7 +212,7 @@ export default function PhoneMockup({ screen = "explore", lang = "en", className
           {screen === "redeem" && (
             <>
               <div style={{ background: "#FFF7ED", border: `1px solid ${C.primary}33`, borderRadius: 10, padding: 8, marginBottom: 9 }}>
-                <div style={{ fontSize: 10, fontWeight: 800, color: C.primary, lineHeight: 1.25 }}>{t.ready}</div>
+                <div style={{ fontSize: 10, fontWeight: 800, color: C.primaryText, lineHeight: 1.25 }}>{t.ready}</div>
               </div>
               <div style={{ background: C.surface, borderRadius: 12, padding: 10, textAlign: "center", boxShadow: "0 1px 3px rgba(15,27,45,.10)" }}>
                 <div style={{ fontSize: 7.5, fontWeight: 800, color: C.muted, letterSpacing: .4, marginBottom: 7 }}>{t.show}</div>
@@ -228,7 +233,7 @@ export default function PhoneMockup({ screen = "explore", lang = "en", className
           {t.tabs.map((label, i) => (
             <div key={label} style={{ flex: 1, textAlign: "center" }}>
               <div style={{ width: 12, height: 12, margin: "0 auto 3px", borderRadius: 4, background: i === 0 ? C.primary : "#D1D5DB" }} />
-              <div style={{ fontSize: 6.5, fontWeight: 700, color: i === 0 ? C.primary : C.faint }}>{label}</div>
+              <div style={{ fontSize: 6.5, fontWeight: 700, color: i === 0 ? C.primaryText : C.faint }}>{label}</div>
             </div>
           ))}
         </div>

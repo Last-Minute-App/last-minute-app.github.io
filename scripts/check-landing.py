@@ -10,6 +10,11 @@ Each rule carries its regression-inventory id:
   L003  footer URLs had a double slash (`/dashboard//terms`)
   L004  the word "deal" on the page — the product says "offer"
   L006  a bare `.env` was not git-ignored
+  L008  the phone mock-ups drew the app in its pre-contrast colours: grey
+        #9CA3AF/#6B7280 text, green #059669 prices and white on #FF6B35
+        (axe, 2026-09-18: ~30 serious contrast failures). Mirror the app's
+        muted/faint/successText/primaryText/primaryFill tokens instead.
+  L009  the footer said "(c) 2025" in 2026 — the year is computed, never typed
 
 NEGATIVE-CONTROLLED: every run first re-introduces each bug in memory and
 requires the rule to catch it, so a rule that went blind fails loudly.
@@ -83,8 +88,30 @@ def l006_env_ignored(over):
     return [] if ".env" in lines else [".gitignore does not ignore a bare .env (secrets could be committed)"]
 
 
+def l008_mockup_contrast(over):
+    src = _strip_comments(read("src/components/PhoneMockup.jsx", over))
+    bad = []
+    for lit in ("#9CA3AF", "#6B7280", "#059669"):
+        if lit.lower() in src.lower():
+            bad.append(f"PhoneMockup.jsx uses {lit} (fails AA as text; use the app's darker token)")
+    for m in re.finditer(r"(background|color):\s*(?:active \? )?C\.primary\b(?!Text|Fill)", src):
+        line = src.count("\n", 0, m.start()) + 1
+        # The inactive dot / decorative shapes may keep the brand colour.
+        if m.group(1) == "background" and "width: 12, height: 12" in src.splitlines()[line - 1]:
+            continue
+        bad.append(f"PhoneMockup.jsx:{line} {m.group(1)} C.primary — use C.primaryText / C.primaryFill")
+    return bad
+
+
+def l009_year(over):
+    return [f"src/translations.js:{i} hard-codes the copyright year — use {{year}}"
+            for i, line in enumerate(read("src/translations.js", over).splitlines(), 1)
+            if re.search(r"(\(c\)|©)\s*20\d\d\b", line)]
+
+
 RULES = [("L002", l002_preview_tags), ("L002b", l002_anchors), ("L003", l003_double_slash),
-         ("L004", l004_deal), ("L006", l006_env_ignored)]
+         ("L004", l004_deal), ("L006", l006_env_ignored), ("L008", l008_mockup_contrast),
+         ("L009", l009_year)]
 
 
 def _mut(rel, old, new):
@@ -98,6 +125,8 @@ CONTROLS = {
     "L003": lambda: _mut("src/App.js", "${MOBILE_APP_URL}terms", "${MOBILE_APP_URL}/terms"),
     "L004": lambda: {"src/translations.js": read("src/translations.js", {}) + "\n// Last-minute deals near you\n"},
     "L006": lambda: {".gitignore": "\n".join(ln for ln in read(".gitignore", {}).splitlines() if ln.strip() != ".env")},
+    "L008": lambda: _mut("src/components/PhoneMockup.jsx", 'faint: "#65707E"', 'faint: "#9CA3AF"'),
+    "L009": lambda: _mut("src/translations.js", "© {year} tiphop", "(c) 2025 tiphop"),
 }
 
 
