@@ -33,11 +33,15 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: Fix ajv dependency
-        run: npm install ajv@8 ajv-keywords@5 --legacy-peer-deps
+      # npm ci, not npm install: the lockfile is now committed, so every
+      # deploy installs the EXACT tree that was tested. Before this, each
+      # deploy re-resolved from scratch — a transitive release could change
+      # (or break, or compromise) the live landing page with no commit here.
+      # --legacy-peer-deps because CRA's peer graph still needs it; the ajv
+      # pair that used to be installed by hand afterwards is now declared in
+      # package.json and locked, so that step is gone.
+      - name: Install dependencies (locked)
+        run: npm ci --legacy-peer-deps
 
       - name: Build
         run: npm run build
