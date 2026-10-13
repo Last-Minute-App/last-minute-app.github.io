@@ -25,7 +25,7 @@ const MOBILE_APP_URL = "/dashboard/";
 // On any network/API error we fall back to the visitor's mail client so a
 // message is never silently lost.
 const CONTACT_EMAIL = "tiphop.app@gmail.com";
-const CONTACT_ENDPOINT = "https://last-minute-app-904761941913.europe-west1.run.app/api/contact";
+const CONTACT_ENDPOINT = "https://api-970513392417.europe-west1.run.app/api/contact";
 
 // Landing traffic — OUR OWN API, no third party. Replaces the PostHog snippet
 // removed on 2026-09-05. Aggregate-only on the server: a day counter, never a
@@ -36,7 +36,7 @@ const CONTACT_ENDPOINT = "https://last-minute-app-904761941913.europe-west1.run.
 // anywhere — we transmit only the BOOLEAN "is this the first hit of this
 // session". Nothing here can recognise a returning visitor tomorrow, which is
 // exactly the property that keeps this consent-free.
-const VISIT_ENDPOINT = "https://last-minute-app-904761941913.europe-west1.run.app/api/landing/visit";
+const VISIT_ENDPOINT = "https://api-970513392417.europe-west1.run.app/api/landing/visit";
 const VISIT_SESSION_KEY = "tiphop_visit_session";
 
 /** Where this visitor came from — a UTM tag we control, else the referring
