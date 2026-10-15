@@ -31,7 +31,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22  # Node 20 reached end of life in April 2026
 
       # npm ci, not npm install: the lockfile is now committed, so every
       # deploy installs the EXACT tree that was tested. Before this, each
